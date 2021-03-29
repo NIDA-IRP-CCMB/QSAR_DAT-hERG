@@ -1,0 +1,8 @@
+"uptake"	"3H]dopamine reuptake"
+"uptake"	"[3H]-dopamine"
+"uptake"	"[3H]dopamine"
+"uptake"	"[3H]DA"
+"uptake"	"[3H]-DA"
+"uptake"	"Inhibition of dopamine (DA) uptake"
+
+

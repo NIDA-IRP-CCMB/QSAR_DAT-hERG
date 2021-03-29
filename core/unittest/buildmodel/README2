@@ -1,0 +1,13 @@
+## we softlink core/conf to current directory
+ln -sf $core_dir core
+ln -sf $conf_dir conf
+
+
+## dataset used in this example is provided
+dataset_rDAT_inhibitor_Ki
+
+## load python
+module load python
+
+## use do_test.py and specificy regression or classification and which model
+ex. python do_test.py -c regression -m xgb

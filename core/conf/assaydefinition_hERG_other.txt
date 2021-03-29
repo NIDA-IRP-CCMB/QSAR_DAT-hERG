@@ -1,0 +1,6 @@
+"hERG"	"Inhibition of human ERG"
+"hERG"	"Inhibition of human Erg"
+"hERG"	"Binding affinity to human ERG"
+"hERG"	"Binding affinity to human Erg"
+"hERG"	"Inhibition of human ERG at 10 uM"
+"hERG"	"Inhibition of human ERG channel"

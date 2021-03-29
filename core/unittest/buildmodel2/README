@@ -1,0 +1,46 @@
+## buildmodel2 is for quick testing of merging our codes
+
+## put the following in your .bashrc
+cheminformatics="$HOME/cheminformatics"
+COREPATH=${cheminformatics}/tocheck/core
+CONFPATH=${cheminformatics}/tocheck/conf
+export PYTHONPATH=${PYTHONPATH}:${COREPATH}:${CONFPATH}
+
+
+
+## dataset used in this example is provided
+dataset
+validation_dataset
+
+## load python
+module load python
+
+
+## testing buildmodel
+
+time python $COREPATH/run_buildmodel.py -s buildmodel -m reg   -x xgb -t 0 -r 1 -n 1 -i dataset/pubdata_40
+time python $COREPATH/run_buildmodel.py -s buildmodel -m class -x xgb -t 0 -r 1 -n 1 -i dataset/pubdata_class_40
+
+time python $COREPATH/run_buildmodel.py -s buildmodel -m reg   -x rf  -t 0 -r 1 -n 1 -i dataset/pubdata_40
+time python $COREPATH/run_buildmodel.py -s buildmodel -m class -x rf  -t 0 -r 1 -n 1 -i dataset/pubdata_class_40
+
+time python $COREPATH/run_buildmodel.py -s buildmodel -m reg   -x xgb -t 0.15 -r 1 -n 1 -i dataset/pubdata_40
+time python $COREPATH/run_buildmodel.py -s buildmodel -m class -x xgb -t 0.15 -r 1 -n 1 -i dataset/pubdata_class_40
+
+time python $COREPATH/run_buildmodel.py -s buildmodel -m reg   -x rf  -t 0.15 -r 1 -n 1 -i dataset/pubdata_40
+time python $COREPATH/run_buildmodel.py -s buildmodel -m class -x rf  -t 0.15 -r 1 -n 1 -i dataset/pubdata_class_40
+
+
+## testing prediction
+time python $COREPATH/run_buildmodel.py -s prediction -m reg -x xgb -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+time python $COREPATH/run_buildmodel.py -s prediction -m reg -x rf  -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+time python $COREPATH/run_buildmodel.py -s prediction -m class -x xgb -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+time python $COREPATH/run_buildmodel.py -s prediction -m class -x rf  -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+
+
+## testing both buildmodel and prediction
+time python $COREPATH/run_buildmodel.py -s both -m reg -x xgb -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+time python $COREPATH/run_buildmodel.py -s both -m reg -x rf  -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+time python $COREPATH/run_buildmodel.py -s both -m class -x xgb -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+time python $COREPATH/run_buildmodel.py -s both -m class -x rf  -t 0 -r 1 -n 1 -i dataset/pubdata_40 -d validation_dataset/testset_pairs
+

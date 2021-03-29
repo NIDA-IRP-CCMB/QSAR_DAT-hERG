@@ -1,0 +1,4 @@
+# rerun filters without secondary test set data
+python run_filters2.py -p hERG -o hERG_filters_rerun -t unittest/data/chembl25_hERG.tsv -a binding -s IC50 -b hERG_binding_IC50_no2nd
+
+

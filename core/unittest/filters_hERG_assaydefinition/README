@@ -1,0 +1,16 @@
+#prepare indata (origianl CHEMBL dataset) on cragger
+mkdir indata
+cp -r /home/khlee/cheminformatics/DAT/0_sql_data/chembl25_Classifier.tsv indata/chembl25_DAT.tsv
+cp -r /home/khlee/cheminformatics/hERG/0_sql_data/chembl25_Classifier.tsv indata/chembl25_hERG.tsv
+
+
+
+# DAT related files: (tsv: full data, dat: short version)
+
+DAT_data_inhibitor.dat
+DAT_data_inhibitor.tsv
+DAT_data_out.dat
+DAT_data_out.tsv
+DAT_data_uptake.dat
+DAT_data_uptake.tsv
+

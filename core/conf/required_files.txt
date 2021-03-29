@@ -1,0 +1,4 @@
+AmyCompounds.smi
+AmyCompounds.act
+to_change.txt
+to_remove.txt
