@@ -45,22 +45,20 @@ class TestBuildModel(unittest.TestCase):
             curate_mols(a, [], [], [])
             curate_mols(a, b, [], [])
 
-        self.assertEquals(curate_mols(a, a, {}, {}), (a, a))
-        self.assertEquals(curate_mols(a, a, {4}, {}), (c, c))
+        self.assertEqual(curate_mols(a, a, {}, {}), (a, a))
+        self.assertEqual(curate_mols(a, a, {4}, {}), (c, c))
 
         mols, acts, deletes, changes = read_data4buildmodel(in_file, 'reg')
         mols, acts = curate_mols(mols, acts, deletes, changes)
 
-    # @tag('skip_setup')
     def test_split_data(self):
         pass
 
-    # @tag('skip_setup')
     def test_all_data(self):
         a = [[1, 2], [3, 4]]
         b = [1, 3]
         c = [2, 4]
-        self.assertEqual(all_data(a, a), (b, c, b))
+        self.assertEquals(all_data(a, a), (b, c, b))
 
     def test_get_output_ext(self):
         self.assertEquals(get_output_ext('a', 'b', 0, 1, 2), "a_b_0.00_1_2")
@@ -74,7 +72,7 @@ class TestBuildModel(unittest.TestCase):
 
         ad_fps, ad_rad = calc_appdom(train_mols, self.output_dir)
         f = open(self.output_dir+('/AD-radius_%s.dat' % output_ext), 'rb')
-        g = open(reference+'./AD-radius_ref.dat')
+        g = open(reference+'/AD-radius_ref.dat', 'rb')
         self.assertEquals(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
@@ -116,6 +114,3 @@ class TestBuildModel(unittest.TestCase):
         self.assertEquals(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
-
-
-
