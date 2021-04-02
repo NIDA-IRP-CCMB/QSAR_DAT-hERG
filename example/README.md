@@ -4,15 +4,15 @@
 
         data_sql
         ├── DAT
-        │   ├── chembl25_homo.tsv			<-------- dataset for human DAT
-        │   ├── chembl25_rat.tsv			<-------- dataset for rat DAT
+        │   ├── chembl25_homo.tsv			<-- dataset for human DAT
+        │   ├── chembl25_rat.tsv			<-- dataset for rat DAT
         │   ├── chembl25_raw.tsv
-        │   ├── chembl25.sql			<-------- sql
-        │   └── chembl25.tsv			<-------- dataset for all DAT
+        │   ├── chembl25.sql			<-- sql
+        │   └── chembl25.tsv			<-- dataset for all DAT
         └── hERG
             ├── chembl25_raw.tsv
-            ├── chembl25.sql                        <-------- sql
-            └── chembl25.tsv			<-------- dataset for hERG
+            ├── chembl25.sql                        <-- sql
+            └── chembl25.tsv			<-- dataset for hERG
 
 
 ### Steps to generate initial ChEMBL dataset from our inhouse sql server
@@ -58,6 +58,10 @@ Note that you would need to have necessary modules installed in your python envi
 
     python ${COREPATH}/run_filters.py -p DAT -t data_sql/DAT/chembl25.tsv -a inhibitor -o dataset_all_DAT_inhibitor -b pubdata -s Ki | tee dataset_all_DAT_inhibitor_Ki.log
 
+
+There are four files are required in our code. AmyCompounds.act/AmyCompounds.smi are used for excluded validation coumpounds from the traning dataset. 
+That ensure the validation set is not used during the training.  "to_change.txt" is used for correcting the bio-activity data. "to_remove.txt" is used 
+to remove obvious problematic compounds from the training dataset. In this example, we simple touch those files without any modification. 
 
     touch dataset_all_DAT_inhibitor/AmyCompounds.act
     touch dataset_all_DAT_inhibitor/AmyCompounds.smi

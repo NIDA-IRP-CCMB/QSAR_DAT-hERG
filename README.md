@@ -50,4 +50,10 @@ for foo in Descriptors.descList:
     print(foo[0])
 ```
 
-ToDo: Look in ChEMBL for a structurally similar pair of compounds (without any chiral centers) that have a difference in affinity to DAT of at least an order of magnitude, and that preferably have measured affinities for hERG
+***Strucure of the repository***
+
+    .
+    ├── core            <-- major scripts 
+    ├── example         <-- example of running filters/buildmodels/prediction
+    ├── README.md
+    └── unittest        <-- unittest
