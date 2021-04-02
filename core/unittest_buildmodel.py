@@ -60,7 +60,7 @@ class TestBuildModel(unittest.TestCase):
         a = [[1, 2], [3, 4]]
         b = [1, 3]
         c = [2, 4]
-        self.assertEquals(all_data(a, a), (b, c, b))
+        self.assertEqual(all_data(a, a), (b, c, b))
 
     def test_get_output_ext(self):
         self.assertEquals(get_output_ext('a', 'b', 0, 1, 2), "a_b_0.00_1_2")
@@ -70,7 +70,7 @@ class TestBuildModel(unittest.TestCase):
 
     def test_calc_appdom(self):
         train_mols, train_names, train_acts, output_ext = self.startUp()
-        self.assertEquals(len(calc_appdom(train_mols, self.output_dir)), 2)
+        self.assertEqual(len(calc_appdom(train_mols, self.output_dir)), 2)
 
         ad_fps, ad_rad = calc_appdom(train_mols, self.output_dir)
         f = open(self.output_dir+('/AD-radius_%s.dat' % output_ext), 'rb')
