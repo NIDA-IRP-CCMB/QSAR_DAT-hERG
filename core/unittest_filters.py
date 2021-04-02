@@ -1,10 +1,21 @@
 import unittest
+
+## define enviroment
+import sys, os
+from pathlib import Path
+home = str(Path.home())
+base_dir = home+'/repositories/herg/hERGvDAT/'
+core_dir = base_dir+'/core'
+conf_dir = core_dir+'/conf'
+sys.path.insert(0, conf_dir)
+sys.path.insert(0, core_dir)
+
 from filters import *
 
 # Initialize global variables
 buffer = None
-chembl_tsv_file = 'unittest/data/chembl25_DAT.tsv'
-chembl_tsv_file2 = 'unittest/data/chembl25_hERG.tsv'
+chembl_tsv_file = core_dir+'/unittest/data/chembl25_DAT.tsv'
+chembl_tsv_file2 = core_dir+'/unittest/data/chembl25_hERG.tsv'
 ref = [13273, 8392, 8369, 3418, 2659, 2368, 1616, 1561, 1559, 1559, 1540, 1540, 1540, 1189, 887, 798, 89]
 ref2 = [20695, 20056, 19330, 10454, 8957, 6685, 2021, 1968, 1542, 1542, 1542, 1519, 1519, 1519, 1350, 737, 263, 474]
 

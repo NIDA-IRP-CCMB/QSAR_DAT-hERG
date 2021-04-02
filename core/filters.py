@@ -2,10 +2,11 @@
 import sys, os
 from pathlib import Path
 home = str(Path.home())
-core_dir = home+'/repositories/herg/core'
-conf_dir = core_dir+"/conf"
-sys.path.insert(0, core_dir)
+base_dir = home+'/repositories/herg/hERGvDAT/'
+core_dir = base_dir+'/core'
+conf_dir = core_dir+'/conf'
 sys.path.insert(0, conf_dir)
+sys.path.insert(0, core_dir)
 
 import pandas as pd
 import numpy as np
