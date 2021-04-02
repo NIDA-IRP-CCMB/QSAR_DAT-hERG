@@ -66,7 +66,12 @@ class TestBuildModel(unittest.TestCase):
         mols, acts = curate_mols(mols, acts, deletes, changes)
 
     def test_split_data(self):
-        pass
+        mols, acts, deletes, changes = read_data4buildmodel(in_file, self.mode)
+        mols, acts = curate_mols(mols, acts, deletes, changes)
+        train_mols, train_names, train_acts, test_mols, test_names, test_acts = split_data(mols, acts, 0.10, 0)
+        self.assertGreater(len(mols), len(train_mols))
+        self.assertGreater(len(mols), len(test_mols))
+        self.assertEqual(len(train_mols) + len(test_mols), len(mols))
 
     def test_all_data(self):
         a = [[1, 2], [3, 4]]
