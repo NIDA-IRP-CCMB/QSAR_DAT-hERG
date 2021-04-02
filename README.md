@@ -55,5 +55,12 @@ for foo in Descriptors.descList:
     .
     ├── core            <-- major scripts 
     ├── example         <-- example of running filters/buildmodels/prediction
-    ├── README.md
-    └── unittest        <-- unittest
+    └── README.md
+
+***unittest***
+
+    module load python
+    # unittest for run_filters
+    python -m unittest -v core/unittest_filters.py
+    # use these following commands
+    python -m unittest -v core/unittest_buildmodel.py
