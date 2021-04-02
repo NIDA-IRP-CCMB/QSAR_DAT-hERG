@@ -59,8 +59,7 @@ for foo in Descriptors.descList:
 
 ***unittest***
 
-    module load python
-    # unittest for run_filters
-    python -m unittest -v core/unittest_filters.py
-    # use these following commands
-    python -m unittest -v core/unittest_buildmodel.py
+    # unittest for filters.py
+    python -m unittest -v core/unittest_filters.py -b
+    # unittest for buildmodel.py
+    python -m unittest -v core/unittest_buildmodel.py -b

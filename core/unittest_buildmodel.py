@@ -1,3 +1,15 @@
+## define enviroment
+import sys, os
+from pathlib import Path
+home = str(Path.home())
+base_dir = home+'/repositories/herg/hERGvDAT/'
+core_dir = base_dir+'/core'
+conf_dir = core_dir+'/conf'
+unittest_data_dir = core_dir+'/unittest_data'
+sys.path.insert(0, conf_dir)
+sys.path.insert(0, core_dir)
+
+
 import unittest
 import os
 import io
@@ -7,8 +19,10 @@ from buildmodel import *
 from descriptor_setup import dnames, dlist
 import pickle
 
-in_file = "./unittest/buildmodel2/dataset/pubdata_40"
-reference = "./unittest/reference"
+
+in_file = unittest_data_dir+"/data4buildmodels/pubdata_40"
+reference = unittest_data_dir+"/reference"
+
 
 
 class TestBuildModel(unittest.TestCase):
