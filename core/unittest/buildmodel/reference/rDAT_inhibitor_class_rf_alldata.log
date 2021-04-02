@@ -1,3 +1,0 @@
-Best model params:  {'max_features': 'log2', 'n_estimators': 1000}
-Final Accuracy Score:  0.9575858250276855
-Out-Of-Bag error for this model is 0.969

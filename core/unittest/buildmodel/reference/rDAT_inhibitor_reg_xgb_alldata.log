@@ -1,3 +1,0 @@
-significant_bits: 394
-fp_descriptors: (560, 394)
-Best parameters score: {'colsample_bytree': 0.2, 'learning_rate': 0.08, 'max_depth': 6, 'subsample': 0.8} 0.4701821362345039
