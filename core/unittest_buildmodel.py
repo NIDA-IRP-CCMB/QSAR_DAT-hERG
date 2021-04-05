@@ -33,7 +33,7 @@ class TestBuildModel(unittest.TestCase):
 
     def tearDown(self):
         if os.path.isdir(self.output_dir):
-            shutil.rmtree(self.output_dir)
+            os.system("rm -rf %s" % self.output_dir)
 
     # setup helper function
     def startUp(self):
