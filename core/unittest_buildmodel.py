@@ -28,6 +28,7 @@ negcon = unittest_data_dir+"/data4buildmodels/pubdata_40"
 class TestBuildModel(unittest.TestCase):
     def setUp(self):
         self.mode = 'reg'
+        self.method = 'xgb'
         self.output_dir = "test_output"
         self.rand_split = gen_random_splits(control_seed=2020, num_splits=1)
         self.rand_states = gen_random_splits(control_seed=501, num_splits=1)
@@ -133,6 +134,23 @@ class TestBuildModel(unittest.TestCase):
         train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
         f = open(self.output_dir+('/sigbits_%s.dat' % output_ext), 'rb')
         g = open(reference+'/sigbits_ref.dat', 'rb')
+        self.assertEquals(pickle.load(f), pickle.load(g))
+        f.close()
+        g.close()
+
+    def test_build_model(self):
+        train_mols, train_names, train_acts, output_ext = self.startUp()
+        train_topo_descs = calc_topo_descs(train_mols)
+        train_topo_descs, topo_index, topo_names = prune_topo_descs(self.mode, train_topo_descs,
+                                                                    train_acts, self.output_dir)
+        train_phore_descs = calc_phore_descs(train_mols)
+        train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
+        train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
+        model, model_score, best_params = build_model(self.mode, self.method, self.rand_state,
+                                                      train_descs, train_acts, self.output_dir)
+
+        f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+        g = open(reference + '/model_ref.dat', 'rb')
         self.assertEquals(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
