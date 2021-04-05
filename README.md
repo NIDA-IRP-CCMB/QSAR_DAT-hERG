@@ -64,13 +64,17 @@ be run in "example" (see README.md in example).
     └── README.md
 
 ### unittest
-To run the unittest, please go to the root diectory.
+To run the unittest, please do this in to the root diectory. There are 19 defined functions in filters.py. The 
+unittest_filters.py cover 15 functions, and some file output funcation (write_smi_act_reg 
+and write_smi_act_class) and simple routien calculation (add_doc_cmpd_cunt and calc_pscale) are excluded. There are 
+20 defined functions in unittest_buildmodel.py. The unittest cover 17 functions, 
+and 3 functions (MSE, R2, and RMSE) for some routine calculation are excluded.
 
     # unittest for filters.py
-    python -m unittest -v core/unittest_filters.py -b | tee core/doc/unittest_filters.log
+    python -m unittest -v core/unittest_filters.py -b
 
     # unittest for buildmodel.py
-    python -m unittest -v core/unittest_buildmodel.py -b | tee core/doc/unittest_buildmodel.log
+    python -m unittest -v core/unittest_buildmodel.py -b
 
 ### example
 #### 1. Datasets (data_sql) provided in this example
