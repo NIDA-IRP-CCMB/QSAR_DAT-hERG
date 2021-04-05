@@ -176,7 +176,7 @@ class TestBuildModel(unittest.TestCase):
     #     g.close()
 
     def test_read_mols(self):
-        a = np.load(reference+"/readmols4pred.npy")
+        a = np.load(reference+"/readmols4pred.npy", allow_pickle=True)
         input_data = read_mols(self.mode, self.method, "pred", datadir="unittest_data/data4buildmodels",
                                modeldir=self.output_dir)
         ref = dict(enumerate(a.flatten()))[0]
