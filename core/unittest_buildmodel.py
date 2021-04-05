@@ -22,7 +22,8 @@ import pickle
 
 in_file = unittest_data_dir+"/data4buildmodels/pubdata_40"
 reference = unittest_data_dir+"/reference"
-negcon = unittest_data_dir+"data4buildmodels/pubdata_40"
+negcon = unittest_data_dir+"/data4buildmodels/pubdata_40"
+
 
 class TestBuildModel(unittest.TestCase):
     def setUp(self):
