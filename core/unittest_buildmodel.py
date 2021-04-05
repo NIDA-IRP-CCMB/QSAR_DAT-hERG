@@ -146,7 +146,7 @@ class TestBuildModel(unittest.TestCase):
         train_phore_descs = calc_phore_descs(train_mols)
         train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
         train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
-        model, model_score, best_params = build_model(self.mode, self.method, self.rand_states,
+        model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
                                                       train_descs, train_acts, self.output_dir)
 
         f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
