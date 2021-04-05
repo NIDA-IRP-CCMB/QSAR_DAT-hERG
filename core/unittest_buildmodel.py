@@ -176,7 +176,8 @@ class TestBuildModel(unittest.TestCase):
     #     g.close()
 
     def test_read_mols(self):
-        ref = np.load(reference+"/readmols4pred.npy")
+        a = np.load(reference+"/readmols4pred.npy")
         input_data = read_mols(self.mode, self.method, "pred", datadir="unittest_data/data4buildmodels",
                                modeldir=self.output_dir)
+        ref = dict(enumerate(a.flatten()))[0]
         self.assertEqual(ref, input_data)
