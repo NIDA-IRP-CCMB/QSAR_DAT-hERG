@@ -183,4 +183,4 @@ class TestBuildModel(unittest.TestCase):
         self.assertEqual(ref["molnames"], input_data["molnames"])
         self.assertEqual(ref["inds"], input_data["inds"])
         self.assertEqual(ref["sigbits"], input_data["sigbits"])
-        self.assertEqual(ref["model"], input_data["model"])
+        self.assertEqual(str(ref["model"]), str(input_data["model"]))
