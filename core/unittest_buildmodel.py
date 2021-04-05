@@ -134,7 +134,7 @@ class TestBuildModel(unittest.TestCase):
     def test_calc_phore_descs(self):
         train_mols, train_names, train_acts, output_ext = self.startUp()
         train_phore_descs = calc_phore_descs(train_mols)
-        train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, output_dir)
+        train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
         a, b = calc_phore_descs(train_mols, phore_sigbits, testing=True)
 
         f = open(reference + "/regression_xgb_0.00.log", 'rb')
