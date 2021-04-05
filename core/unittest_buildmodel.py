@@ -191,7 +191,7 @@ class TestBuildModel(unittest.TestCase):
     def test_make_preds(self):
         a = np.load(reference+"/makepreds.npy", allow_pickle=True)
         ref = dict(enumerate(a.flatten()))[0]
-        input_data = read_mols(self.mode, self.method, "pred", datadir="unittest_data/data4buildmodels",
+        input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
                                modeldir=reference)
         molnames = input_data['molnames']
         mols = input_data['molecules']
