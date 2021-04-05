@@ -22,7 +22,7 @@ import pickle
 
 in_file = unittest_data_dir+"/data4buildmodels/pubdata_40"
 reference = unittest_data_dir+"/reference"
-# negcon = unittest_data_dir+"/neg_control"
+negcon = unittest_data_dir+"data4buildmodels/pubdata_40"
 
 class TestBuildModel(unittest.TestCase):
     def setUp(self):
@@ -47,11 +47,11 @@ class TestBuildModel(unittest.TestCase):
         return train_mols, train_names, train_acts, output_ext
 
     # Check using negative control
-    # def test_read_data(self):
-    #     mols1, acts1, deletes1, changes1 = read_data4buildmodel(in_file, self.mode)
-    #     mols2, acts2, deletes2, changes2 = read_data4buildmodel(negcon, self.mode)
-    #     self.assertNotEquals(mols1, mols2)
-    #     self.assertNotEquals(acts1, acts2)
+    def test_read_data(self):
+        mols1, acts1, deletes1, changes1 = read_data4buildmodel(in_file, self.mode)
+        mols2, acts2, deletes2, changes2 = read_data4buildmodel(negcon, self.mode)
+        self.assertNotEquals(mols1, mols2)
+        self.assertNotEquals(acts1, acts2)
 
     def test_curate_mols(self):
         a = [(1, 2), (3, 4)]
@@ -135,7 +135,3 @@ class TestBuildModel(unittest.TestCase):
         self.assertEquals(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
-
-    # def test_build_model(self):
-    #     train_mols, train_names, train_acts, output_ext = self.startUp()
-
