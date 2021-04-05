@@ -223,6 +223,7 @@ class TestBuildModel(unittest.TestCase):
     def test_summarize_preds(self):
         molnames, descriptors, model, result_list = self.startUp2()
         pred_results = make_preds(molnames, descriptors, model, self.rand_split[0], mode=self.mode)
+        result_list.append(pred_results['predictions'])
         compound, pred_mean, pred_error = summarize_preds(molnames, result_list)
         data = {"compound": compound, "mean": pred_mean, "stdev": pred_error}
 
