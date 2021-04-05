@@ -180,4 +180,7 @@ class TestBuildModel(unittest.TestCase):
         input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
                                modeldir=reference)
         ref = dict(enumerate(a.flatten()))[0]
-        self.assertEqual(ref, input_data)
+        self.assertEqual(ref["molnames"], input_data["molnames"])
+        self.assertEqual(ref["inds"], input_data["inds"])
+        self.assertEqual(ref["sigbits"], input_data["sigbits"])
+        self.assertEqual(ref["model"], input_data["model"])
