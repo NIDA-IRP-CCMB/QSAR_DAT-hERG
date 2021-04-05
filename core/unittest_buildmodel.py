@@ -48,6 +48,18 @@ class TestBuildModel(unittest.TestCase):
 
         return train_mols, train_names, train_acts, output_ext
 
+    # setup helper function for late-stage buildmodel functions
+    def startUp1(self):
+        train_mols, train_names, train_acts, output_ext = self.startUp()
+        train_topo_descs = calc_topo_descs(train_mols)
+        train_topo_descs, topo_index, topo_names = prune_topo_descs(self.mode, train_topo_descs,
+                                                                    train_acts, self.output_dir)
+        train_phore_descs = calc_phore_descs(train_mols)
+        train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
+        train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
+
+        return train_mols, train_acts, train_names, train_descs
+
     # setup helper function for predictions
     def startUp2(self):
         input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
@@ -182,25 +194,19 @@ class TestBuildModel(unittest.TestCase):
         f.close()
         g.close()
 
-    # def test_build_model(self):
-    #     train_mols, train_names, train_acts, output_ext = self.startUp()
-    #     train_topo_descs = calc_topo_descs(train_mols)
-    #     train_topo_descs, topo_index, topo_names = prune_topo_descs(self.mode, train_topo_descs,
-    #                                                                 train_acts, self.output_dir)
-    #     train_phore_descs = calc_phore_descs(train_mols)
-    #     train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
-    #     train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
-    #     model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
-    #                                                   train_descs, train_acts, self.output_dir)
-    #
-    #     # compare the string from model output to make sure parameters are the same
-    #     f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-    #     # f = open(reference + '/model_ref.dat', 'rb')
-    #     # g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-    #     g = open(reference + '/model_ref.dat', 'rb')
-    #     self.assertEqual(str(pickle.load(f)), str(pickle.load(g)))
-    #     f.close()
-    #     g.close()
+    def test_build_model(self):
+        train_mols, train_acts, train_names, train_descs = self.startUp1()
+        model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
+                                                      train_descs, train_acts, self.output_dir)
+
+        # compare the string from model output to make sure parameters are the same
+        f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+        # f = open(reference + '/model_ref.dat', 'rb')
+        # g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+        g = open(reference + '/model_ref.dat', 'rb')
+        self.assertEqual(str(pickle.load(f)), str(pickle.load(g)))
+        f.close()
+        g.close()
 
     def test_read_mols(self):
         a = np.load(reference+"/readmols4pred.npy", allow_pickle=True)
@@ -233,4 +239,30 @@ class TestBuildModel(unittest.TestCase):
         self.assertTrue(data["compound"] == ref["compound"])
         self.assertTrue(data["mean"] == ref["mean"])
         self.assertTrue(data["stdev"] == ref["stdev"])
+
+    def test_predict_model(self):
+        a = np.load(reference + "/predictmodel.npy", allow_pickle=True)
+        ref = dict(enumerate(a.flatten()))[0]
+
+        train_mols, train_acts, train_names, train_descs = self.startUp1()
+        model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
+                                                      train_descs, train_acts, self.output_dir)
+
+        test_mols, test_acts, test_deletes, test_changes = read_data4buildmodel(negcon, self.mode)
+        test_mols, test_acts = curate_mols(test_mols, test_acts, test_deletes, test_changes)
+        test_mols, test_names, test_acts = all_data(test_mols, test_acts)
+
+        test_topo_descs = calc_topo_descs(test_mols, topo_index)
+        test_phore_descriptors = calc_phore_descs(test_mols, phore_sigbits)
+        test_descs = np.concatenate((test_topo_descs, test_phore_descriptors), axis=1)
+
+        test_r2, test_rmse, test_mse = predict_model(model, test_descs, test_acts, train_acts, self.rand_split[0],
+                                                     self.output_dir, self.mode, self.method, self.rand_states[0])
+
+        self.assertEqual(ref["r2"], test_r2)
+        self.assertEqual(ref["rmse"], test_rmse)
+        self.assertEqual(ref["mse"], test_mse)
+
+
+
 
