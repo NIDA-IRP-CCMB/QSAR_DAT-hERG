@@ -54,8 +54,8 @@ class TestBuildModel(unittest.TestCase):
         self.assertNotEqual(mols1, mols2)
         self.assertNotEqual(acts1, acts2)
 
-        self.assertEqual(acts2, acts4)
-        self.assertEqual(acts2, acts4)
+        self.assertEqual(mols2, mols4)
+        self.assertEqual(len(mols2), len(acts4))
 
         # self.assertEqual(mols1, mols3)
         # self.assertEqual(acts1, acts3)
