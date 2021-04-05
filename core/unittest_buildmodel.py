@@ -209,6 +209,6 @@ class TestBuildModel(unittest.TestCase):
         result_list = []
         phore_descriptors = calc_phore_descs(mols, sigbits)
         descriptors = np.concatenate((descriptors, phore_descriptors), axis=1)
-        pred_results = make_preds(molnames, descriptors, model, self.random_split[0], mode=self.mode)
+        pred_results = make_preds(molnames, descriptors, model, self.rand_split[0], mode=self.mode)
 
         self.assertEqual(pred_results, ref)
