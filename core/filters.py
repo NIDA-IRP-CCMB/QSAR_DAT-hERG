@@ -54,7 +54,7 @@ def read_data(file_name, Verbose=False):
     return raw_data
 
 
-def filter_confidence(in_lines, broad=False, kickout=False, Verbose=False):
+def filter_confidence(in_lines, broad=False, Verbose=False):
 
     # Remove compounds with a confidence score less than 9
     # this should be run early in the filter pipeline
@@ -74,7 +74,7 @@ def filter_confidence(in_lines, broad=False, kickout=False, Verbose=False):
     return in_lines.reset_index(drop=True)
 
 
-def filter_assay_type(in_lines, kickout=False, Verbose=False):
+def filter_assay_type(in_lines, Verbose=False):
 
     # Remove entries that are not binding or functional studies
     # if this filter is used, it should be done early in the pipeline
@@ -92,7 +92,7 @@ def filter_assay_type(in_lines, kickout=False, Verbose=False):
     return in_lines.reset_index(drop=True)
 
 
-def filter_affinity(in_lines, keepKi=True, keepIC50=True, kickout=False, Verbose=False):
+def filter_affinity(in_lines, keepKi=True, keepIC50=True, Verbose=False):
 
     # Remove entries that are not Ki or IC50 values
     # if this filter is used, it should be placed early in the filter pipeline
@@ -113,7 +113,7 @@ def filter_affinity(in_lines, keepKi=True, keepIC50=True, kickout=False, Verbose
     return in_lines.reset_index(drop=True)
 
 
-def filter_units(in_lines, kickout=False, Verbose=False):
+def filter_units(in_lines, Verbose=False):
 
     # Remove compounds without a standard unit of nM
     # this filter should be placed after the filter_affinity filter is used to limit the number of false positives
@@ -125,7 +125,7 @@ def filter_units(in_lines, kickout=False, Verbose=False):
 
     return in_lines.reset_index(drop=True)
 
-def filter_exact(in_lines, include_ceilings=False, include_drugmatrix=False, kickout=False, Verbose=False):
+def filter_exact(in_lines, include_ceilings=False, include_drugmatrix=False, Verbose=False):
 
     # Process compounds with inexact relationships
     # this should probably be run early in the filtering pipeline, but after values that are not Ki or IC50 are removed
@@ -156,8 +156,7 @@ def filter_exact(in_lines, include_ceilings=False, include_drugmatrix=False, kic
 
     return in_lines.reset_index(drop=True)
 
-def filter_assaydefinition(in_lines, target, key, kickout=False,
-                                Verbose=False):
+def filter_assaydefinition(in_lines, target, key, Verbose=False):
     # filter for displacement assay data
     filterfile = conf_dir+'/assaydefinition_'+target+'_'+key+'.txt'
     df = pd.read_table(filterfile, names=['keys', 'text'])
@@ -179,7 +178,7 @@ def filter_assaydefinition(in_lines, target, key, kickout=False,
     return in_lines_in.reset_index(drop=True), in_lines_out.reset_index(drop=True)
 
 
-def filter_secondary_test_set(in_lines, kickout=False, Verbose=False):
+def filter_secondary_test_set(in_lines, Verbose=False):
 
     # Remove compounds present in secondary test set
     # this filter only applies to andy_hERG models
@@ -192,7 +191,7 @@ def filter_secondary_test_set(in_lines, kickout=False, Verbose=False):
 
     return in_lines.reset_index(drop=True)
 
-def add_doc_cmpd_count(in_lines, kickout=False, Verbose=False):
+def add_doc_cmpd_count(in_lines, Verbose=False):
 
     # add field to end of data to represent how many compounds
     # are in a given publication (this makes field 39)
@@ -221,7 +220,7 @@ def add_doc_cmpd_count(in_lines, kickout=False, Verbose=False):
 
     return in_lines.reset_index(drop=True)
 
-def filter_small_sets(in_lines, threshold=5, kickout=False, Verbose=False):
+def filter_small_sets(in_lines, threshold=5, Verbose=False):
 
     # Remove compounds that come from sets of less than threshold compounds
     # this filter is generally only applicable for regression models
@@ -238,7 +237,7 @@ def filter_small_sets(in_lines, threshold=5, kickout=False, Verbose=False):
     return in_lines.reset_index(drop=True)
 
 #should compare dataframes later to check if salts were removed properly
-def filter_salts(in_lines, kickout=False, Verbose=False):
+def filter_salts(in_lines, Verbose=False):
 
     # standardize structures and remove salts
     #
@@ -256,8 +255,6 @@ def filter_salts(in_lines, kickout=False, Verbose=False):
         smiles_out = Chem.MolToSmiles(remover(mol_out), isomericSmiles=False)
         if '.' in smiles_out:
             in_lines = in_lines.drop(i)
-            if kickout:
-                kickouts.writerow(in_lines[i])
         else:
             in_lines.loc[i, 'canonical_smiles'] = smiles_out
 #             in_lines['canonical_smiles'].replace(i,smiles_out)
@@ -271,7 +268,7 @@ def filter_salts(in_lines, kickout=False, Verbose=False):
     return in_lines.reset_index(drop=True)
 
 
-def filter_elements(in_lines, kickout=False, Verbose=False):
+def filter_elements(in_lines, Verbose=False):
 
     # remove entries with oddball elements
     # this needs to be run after the desalting and molecular standardization step
@@ -283,15 +280,13 @@ def filter_elements(in_lines, kickout=False, Verbose=False):
             continue
         else:
             in_lines = in_lines.drop(i)
-            if kickout:
-                kickouts.writerow(in_lines[i])
-                
+
     if Verbose:
         print('Number of compounds after oddball element filter: ', len(in_lines))
 
     return in_lines.reset_index(drop=True)
 
-def filter_size(in_lines, maxweight=650, kickout=False, Verbose=False):
+def filter_size(in_lines, maxweight=650, Verbose=False):
 
     # remove compounds with a MW that is greater than the maximum
     # this needs to be run after the structure standardization and desalting step
@@ -310,7 +305,7 @@ def filter_size(in_lines, maxweight=650, kickout=False, Verbose=False):
                    16:'standard_units', 17:'standard_flag', 18:'standard_type', 19:'pchembl_value'
 '''
 #in progress
-def filter_pchembl_values(in_lines, replace=False, kickout=False, Verbose=False):
+def filter_pchembl_values(in_lines, replace=False, Verbose=False):
 
     # remove compounds that don't have a pChEMBL value associated with them unless we want to
     # calculate it manually.  This should probably be run after filter_exact so that floor and
@@ -336,18 +331,13 @@ def filter_pchembl_values(in_lines, replace=False, kickout=False, Verbose=False)
         in_lines = pd.concat([in_lines,nans])
     else:
         drops = nans
-    
-    if kickout:
-        drops = drops.reset_index(drop=True)
-        for i in range(len(drops)):
-            kickouts.writerow(drops[i])
 
     if Verbose:
         print('Number of compounds after pChEMBL value filter: ', len(in_lines))
 
     return in_lines.reset_index(drop=True)
 
-def filter_weirdos(in_lines, kickout=False, Verbose=False):
+def filter_weirdos(in_lines, Verbose=False):
 
     # filter out some odd edge cases we occasionall see in  a full data dump
     # this may not be necessesary to use routinely.
@@ -357,11 +347,6 @@ def filter_weirdos(in_lines, kickout=False, Verbose=False):
     drops = in_lines.iloc[list(drop_1.index + list(set(drop_2.index) - set(drop_1.index)))]
     in_lines = in_lines.drop(drops.index)
     
-    if kickout:
-        drops = drops.reset_index(drop=True)
-        for i in range(len(drops)):
-            kickouts.writerow(drops[i])
-
 
     if Verbose:
         print('Number of compounds after edge case filter: ', len(in_lines))
@@ -371,7 +356,7 @@ def filter_weirdos(in_lines, kickout=False, Verbose=False):
 0:'pref_name', 1:'organism', 15:'standard_value',
                    16:'standard_units', 17:'standard_flag', 18:'standard_type', 19:'pchembl_value'
 '''
-def deduplicate_mols(in_lines, limit_range=False, kickout=False, Verbose=False):
+def deduplicate_mols(in_lines, limit_range=False, Verbose=False):
 
     # verify that we only have one instance of a molecule in the final set
     # this needs to be the last filter run
