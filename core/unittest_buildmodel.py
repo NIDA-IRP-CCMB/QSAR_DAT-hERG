@@ -1,6 +1,10 @@
 ## define enviroment
-import sys, os
+import sys
 from pathlib import Path
+import unittest
+import shutil
+import pickle
+import os
 home = str(Path.home())
 base_dir = home+'/repositories/herg/hERGvDAT/'
 core_dir = base_dir+'/core'
@@ -9,16 +13,8 @@ unittest_data_dir = core_dir+'/unittest_data'
 sys.path.insert(0, conf_dir)
 sys.path.insert(0, core_dir)
 
-
-import unittest
-import os
-import io
-import shutil
-from pathlib import Path
 from buildmodel import *
 from descriptor_setup import dnames, dlist
-import pickle
-
 
 in_file = unittest_data_dir+"/data4buildmodels/pubdata_40"
 reference = unittest_data_dir+"/reference"
@@ -52,8 +48,8 @@ class TestBuildModel(unittest.TestCase):
     def test_read_data(self):
         mols1, acts1, deletes1, changes1 = read_data4buildmodel(in_file, self.mode)
         mols2, acts2, deletes2, changes2 = read_data4buildmodel(negcon, self.mode)
-        self.assertNotEquals(mols1, mols2)
-        self.assertNotEquals(acts1, acts2)
+        self.assertNotEqual(mols1, mols2)
+        self.assertNotEqual(acts1, acts2)
 
     def test_curate_mols(self):
         a = [(1, 2), (3, 4)]
@@ -96,6 +92,12 @@ class TestBuildModel(unittest.TestCase):
         ad_fps, ad_rad = calc_appdom(train_mols, self.output_dir)
         f = open(self.output_dir+('/AD-radius_%s.dat' % output_ext), 'rb')
         g = open(reference+'/AD-radius_ref.dat', 'rb')
+        self.assertEquals(pickle.load(f), pickle.load(g))
+        f.close()
+        g.close()
+
+        f = open(self.output_dir + ('/training-FPs_%s.dat' % output_ext), 'rb')
+        g = open(reference + '/training-FPs_ref.dat', 'rb')
         self.assertEquals(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
@@ -151,6 +153,6 @@ class TestBuildModel(unittest.TestCase):
 
         f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
         g = open(reference + '/model_ref.dat', 'rb')
-        self.assertEquals(pickle.load(f), pickle.load(g))
+        self.assertEqual(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
