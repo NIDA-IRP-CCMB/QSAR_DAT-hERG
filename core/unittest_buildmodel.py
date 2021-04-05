@@ -54,11 +54,8 @@ class TestBuildModel(unittest.TestCase):
         self.assertNotEqual(mols1, mols2)
         self.assertNotEqual(acts1, acts2)
 
-        self.assertEqual(mols2, mols4)
-        self.assertEqual(len(mols2), len(acts4))
-
-        # self.assertEqual(mols1, mols3)
-        # self.assertEqual(acts1, acts3)
+        self.assertEqual(len(mols1), len(mols3))
+        self.assertEqual(acts1, acts3)
 
     def test_curate_mols(self):
         a = [(1, 2), (3, 4)]
@@ -177,3 +174,9 @@ class TestBuildModel(unittest.TestCase):
     #     self.assertEqual(str(pickle.load(f)), str(pickle.load(g)))
     #     f.close()
     #     g.close()
+
+    def test_read_mols(self):
+        ref = np.load(reference+"/readmols4pred.npy")
+        input_data = read_mols(self.mode, self.method, "pred", datadir="unittest_data/data4buildmodels",
+                               modeldir=self.output_dir)
+        self.assertEqual(ref, input_data)
