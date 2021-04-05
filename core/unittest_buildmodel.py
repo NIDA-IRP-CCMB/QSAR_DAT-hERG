@@ -137,7 +137,7 @@ class TestBuildModel(unittest.TestCase):
         train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, output_dir)
         a, b = calc_phore_descs(train_mols, phore_sigbits, testing=True)
 
-        f = open(self.output_dir + "regression_xgb_0.00.log", 'rb')
+        f = open(reference + "/regression_xgb_0.00.log", 'rb')
         self.assertEqual(f.readlines()[1], a)
         self.assertEqual(f.readlines()[2], b)
         f.close()
