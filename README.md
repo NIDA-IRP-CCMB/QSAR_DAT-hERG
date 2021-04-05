@@ -1,3 +1,4 @@
+## Introduction
 The code in this repository is the chemoinformatics part of our project in developing an infrastrature for counter screening small-molecule ligands for a selected target and against hERG. 
 For the moment, we focus on the ligands for the dopamine transporter (DAT).  
 
@@ -15,8 +16,7 @@ Due to the stochastic element in the prediction, for regression models, we creat
 descritors rather than fingerprint descriptors derived from the Morgan Topological fingerprints.
 
 
-
-***Runtime environment***
+## Runtime environment
 
 These models are coded in python 3.6.4.  They were developed using RDKit version
 2018.3.1, scikit-learn 0.21.1, MolVS 0.1.1, and xgboost .  Xgboost,
@@ -40,7 +40,7 @@ pip install MolVS
 pip install -U scikit-learn
 ```
 
-***About Descriptor Generation***
+### About Descriptor Generation
 
 The 2D descriptors that are available in rdkit are referenced in Descriptors.descList.  A code snippet that will list
 these descriptors at an interactive python prompt is:
@@ -50,16 +50,28 @@ for foo in Descriptors.descList:
     print(foo[0])
 ```
 
-***Strucure of the repository***
+### Strucure of the repository
+The major scripts are in core directory. The unittest is included in core. An example of running the production run can 
+be run in "example" (see README.md in example). 
 
-    .
-    ├── core            <-- major scripts 
+    hERGvDAT
+    ├── core            <-- major scripts (& unittest included)
     ├── example         <-- example of running filters/buildmodels/prediction
     └── README.md
 
-***unittest***
+### unittest
+To run the unittest, please go to the root diectory.
 
     # unittest for filters.py
-    python -m unittest -v core/unittest_filters.py -b
+    python -m unittest -v core/unittest_filters.py -b | tee unittest_filters.log
+
     # unittest for buildmodel.py
-    python -m unittest -v core/unittest_buildmodel.py -b
+    python -m unittest -v core/unittest_buildmodel.py -b | tee unittest_buildmodel.log
+
+
+## Contributors
+* Andrew Fant 
+* Joslyn Jung
+* Andy Guan
+* Kuo Hao Lee
+* Lei Shi*  

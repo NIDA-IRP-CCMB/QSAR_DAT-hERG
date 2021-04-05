@@ -1,26 +1,3 @@
-"""
-Program: buildmodel.py
-
-Written: Andrew Fant, Joslyn Jung
-
-This is a python program to generate a QSAR regression model using rdkit and scipy. The molecular descriptor data is
-    read and processed with extraneous descriptors removed, and the XGBoost model determines the best-performing
-    parameters to be used.
-
-input: four files.  1) named training.smi. This is the Molecules training set.
-                       SMILES formatted holding the structure of the molecules in the model training set.
-
-                    2) named training.act. This is the Activities training set.  each line has the name of one molecule
-                       and its activity as a pIC50.
-
-                    3) named testset-2.smi.
-                    4) named testset-2.act.
-
-                   N.B. molecules and activities need to be in the same order in both files.
-
-output: generates and saves XGBoost regression model with optimized parameters in build.pickle.dat
-"""
-
 ## define enviroment
 import sys, os
 from pathlib import Path
@@ -32,9 +9,6 @@ sys.path.insert(0, conf_dir)
 sys.path.insert(0, core_dir)
 
 
-
-import os
-import numpy as np
 from rdkit.Chem import AllChem as Chem
 from rdkit.Chem.Pharm2D import Gobbi_Pharm2D, Generate
 from rdkit import DataStructs
