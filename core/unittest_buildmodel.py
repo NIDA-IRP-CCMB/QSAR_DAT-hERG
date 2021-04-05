@@ -152,7 +152,8 @@ class TestBuildModel(unittest.TestCase):
                                                       train_descs, train_acts, self.output_dir)
 
         f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-        g = open(reference + '/model_ref.dat', 'rb')
+        g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+        # g = open(reference + '/model_ref.dat', 'rb')
         self.assertEqual(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
