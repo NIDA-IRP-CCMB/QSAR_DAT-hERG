@@ -1,0 +1,35 @@
+test_01_read_data (core.unittest_filters.TestFilters) ... ok
+test_02_confidence_filter (core.unittest_filters.TestFilters) ... ok
+test_03_assay_filter (core.unittest_filters.TestFilters) ... ok
+test_04_affinity_filter (core.unittest_filters.TestFilters) ... ok
+test_05_units_filter (core.unittest_filters.TestFilters) ... ok
+test_06_exact_filter (core.unittest_filters.TestFilters) ... ok
+test_07_assay_definition_filter (core.unittest_filters.TestFilters) ... ok
+test_08_small_set_filter (core.unittest_filters.TestFilters) ... ok
+test_09_salts_filter (core.unittest_filters.TestFilters) ... ok
+test_10_elements_filter (core.unittest_filters.TestFilters) ... ok
+test_11_size_filter (core.unittest_filters.TestFilters) ... ok
+test_12_pchembl_filter (core.unittest_filters.TestFilters) ... ok
+test_13_weirdos_filter (core.unittest_filters.TestFilters) ... ok
+test_14_deduplicate_filter (core.unittest_filters.TestFilters) ... ok
+test_01_read_data (core.unittest_filters.TestFilters2) ... ok
+test_02_confidence_filter (core.unittest_filters.TestFilters2) ... ok
+test_03_assay_filter (core.unittest_filters.TestFilters2) ... ok
+test_04_affinity_filter (core.unittest_filters.TestFilters2) ... ok
+test_05_units_filter (core.unittest_filters.TestFilters2) ... ok
+test_06_exact_filter (core.unittest_filters.TestFilters2) ... ok
+test_07_assay_definition_filter (core.unittest_filters.TestFilters2) ... ok
+test_08_secondary_set_filter (core.unittest_filters.TestFilters2) ... ok
+test_09_small_set_filter (core.unittest_filters.TestFilters2) ... ok
+test_10_salts_filter (core.unittest_filters.TestFilters2) ... ok
+test_11_elements_filter (core.unittest_filters.TestFilters2) ... ok
+test_12_size_filter (core.unittest_filters.TestFilters2) ... ok
+test_13_pchembl_filter (core.unittest_filters.TestFilters2) ... ok
+test_14_weirdos_filter (core.unittest_filters.TestFilters2) ... ok
+test_15_deduplicate_filter (core.unittest_filters.TestFilters2) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 21.767s
+
+OK
+

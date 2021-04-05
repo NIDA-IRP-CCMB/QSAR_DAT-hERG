@@ -1,0 +1,23 @@
+test_all_data (core.unittest_buildmodel.TestBuildModel) ... ok
+test_build_model (core.unittest_buildmodel.TestBuildModel) ... ok
+test_calc_appdom (core.unittest_buildmodel.TestBuildModel) ... ok
+test_calc_phore_descs (core.unittest_buildmodel.TestBuildModel) ... ok
+test_calc_topo_descs (core.unittest_buildmodel.TestBuildModel) ... ok
+test_check_appdom (core.unittest_buildmodel.TestBuildModel) ... ok
+test_curate_mols (core.unittest_buildmodel.TestBuildModel) ... ok
+test_get_output_dir (core.unittest_buildmodel.TestBuildModel) ... ok
+test_get_output_ext (core.unittest_buildmodel.TestBuildModel) ... ok
+test_make_preds (core.unittest_buildmodel.TestBuildModel) ... ok
+test_predict_model (core.unittest_buildmodel.TestBuildModel) ... ok
+test_prune_phore_descs (core.unittest_buildmodel.TestBuildModel) ... ok
+test_prune_topo_descs (core.unittest_buildmodel.TestBuildModel) ... ok
+test_read_data (core.unittest_buildmodel.TestBuildModel) ... ok
+test_read_mols (core.unittest_buildmodel.TestBuildModel) ... ok
+test_split_data (core.unittest_buildmodel.TestBuildModel) ... ok
+test_summarize_preds (core.unittest_buildmodel.TestBuildModel) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 162.205s
+
+OK
+
