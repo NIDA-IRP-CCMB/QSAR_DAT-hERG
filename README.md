@@ -15,6 +15,10 @@ The counter or synergistic screening platform can be easily adapted to identify 
 Due to the stochastic element in the prediction, for regression models, we create multiple models to be used in the prediction and take the average. The classifier models were modified to use the RDKit topological
 descritors rather than fingerprint descriptors derived from the Morgan Topological fingerprints.
 
+***Workflow***
+
+Workflow of building the machine learning based QSAR models and using them to make predictions.
+![Workflow](core/doc/workflow_v3.png)
 
 ## Runtime environment
 
@@ -75,3 +79,5 @@ To run the unittest, please go to the root diectory.
 * Andy Guan
 * Kuo Hao Lee
 * Lei Shi*  
+
+
