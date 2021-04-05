@@ -475,21 +475,6 @@ def prune_topo_descs(mode, input_descs, acts_train, out_model_dir):
     return cleaned_descriptors, indices, local_dnames
 
 
-# def delete_topo_descs(input_descs, desc_list):
-#     del_indices = []
-#     for i in range(len(dnames)):
-#         if i not in desc_list:
-#             del_indices.append(i)
-#     del_indices.reverse()
-#
-#     output_descs = copy.copy(input_descs)
-#     for i in del_indices:
-#         output_descs = np.delete(output_descs, [i], axis=1)
-#     print("raw_descriptors_test:", output_descs.shape)
-#
-#     return output_descs
-
-
 def calc_phore_descs(mols, significant_bits=None):
     fp_holding = []
     accumulated_bits_set = {}
@@ -560,21 +545,6 @@ def prune_phore_descs(input_descs, out_model_dir):
         pickle.dump(significant_bits, f)
 
     return fp_descriptors, significant_bits, fp_names
-
-
-# def delete_phore_descs(input_descs, significant_bits):
-#     # Extract pharmacophore bits for test set (same bits as removed from training set)
-#
-#     nmols = np.shape(input_descs)[0]
-#     output_phores = np.zeros((nmols, len(significant_bits)))
-#
-#     for mol_num in range(nmols):
-#         for bit_num in range(len(significant_bits)):
-#             if significant_bits[bit_num] in input_descs[mol_num].GetOnBits():
-#                 output_phores[mol_num, bit_num] = 1
-#     print("fp_descriptors_test:", output_phores.shape)
-#
-#     return output_phores
 
 
 def build_model(mode, ml, rand_state, training_descs, training_acts, out_model_dir):
