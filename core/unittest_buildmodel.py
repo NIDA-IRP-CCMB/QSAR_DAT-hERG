@@ -18,7 +18,7 @@ from descriptor_setup import dnames, dlist
 
 in_file = unittest_data_dir+"/data4buildmodels/pubdata_40"
 reference = unittest_data_dir+"/reference"
-negcon = unittest_data_dir+"/data4buildmodels/pubdata_40"
+negcon = unittest_data_dir+"/data4buildmodels/pubdata_20_ctrl"
 
 
 class TestBuildModel(unittest.TestCase):
@@ -52,7 +52,7 @@ class TestBuildModel(unittest.TestCase):
 
         self.assertNotEqual(mols1, mols2)
         self.assertNotEqual(acts1, acts2)
-        
+
         self.assertEqual(mols1, mols3)
         self.assertEqual(acts1, acts3)
 
