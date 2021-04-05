@@ -211,4 +211,4 @@ class TestBuildModel(unittest.TestCase):
         descriptors = np.concatenate((descriptors, phore_descriptors), axis=1)
         pred_results = make_preds(molnames, descriptors, model, self.rand_split[0], mode=self.mode)
 
-        self.assertEqual(pred_results, ref)
+        self.assertTrue((pred_results == ref).all())
