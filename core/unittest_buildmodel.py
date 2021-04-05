@@ -231,6 +231,6 @@ class TestBuildModel(unittest.TestCase):
         ref = dict(enumerate(a.flatten()))[0]
 
         self.assertTrue(data["compound"] == ref["compound"])
-        self.assertTrue((data["mean"] == ref["mean"]).all())
-        self.assertTrue((data["stdev"] == ref["stdev"]).all())
+        self.assertTrue(data["mean"] == ref["mean"])
+        self.assertTrue(data["stdev"] == ref["stdev"])
 
