@@ -132,7 +132,15 @@ class TestBuildModel(unittest.TestCase):
         g.close()
 
     def test_calc_phore_descs(self):
-        pass
+        train_mols, train_names, train_acts, output_ext = self.startUp()
+        train_phore_descs = calc_phore_descs(train_mols)
+        train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, output_dir)
+        a, b = calc_phore_descs(train_mols, phore_sigbits, testing=True)
+
+        f = open(self.output_dir + "regression_xgb_0.00.log", 'rb')
+        self.assertEqual(f.readlines()[1], a)
+        self.assertEqual(f.readlines()[2], b)
+        f.close()
 
     def test_prune_phore_descs(self):
         train_mols, train_names, train_acts, output_ext = self.startUp()
@@ -145,22 +153,22 @@ class TestBuildModel(unittest.TestCase):
         f.close()
         g.close()
 
-    def test_build_model(self):
-        train_mols, train_names, train_acts, output_ext = self.startUp()
-        train_topo_descs = calc_topo_descs(train_mols)
-        train_topo_descs, topo_index, topo_names = prune_topo_descs(self.mode, train_topo_descs,
-                                                                    train_acts, self.output_dir)
-        train_phore_descs = calc_phore_descs(train_mols)
-        train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
-        train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
-        model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
-                                                      train_descs, train_acts, self.output_dir)
-
-        # compare the string from model output to make sure parameters are the same
-        f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-        # f = open(reference + '/model_ref.dat', 'rb')
-        # g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-        g = open(reference + '/model_ref.dat', 'rb')
-        self.assertEqual(str(pickle.load(f)), str(pickle.load(g)))
-        f.close()
-        g.close()
+    # def test_build_model(self):
+    #     train_mols, train_names, train_acts, output_ext = self.startUp()
+    #     train_topo_descs = calc_topo_descs(train_mols)
+    #     train_topo_descs, topo_index, topo_names = prune_topo_descs(self.mode, train_topo_descs,
+    #                                                                 train_acts, self.output_dir)
+    #     train_phore_descs = calc_phore_descs(train_mols)
+    #     train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
+    #     train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
+    #     model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
+    #                                                   train_descs, train_acts, self.output_dir)
+    #
+    #     # compare the string from model output to make sure parameters are the same
+    #     f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+    #     # f = open(reference + '/model_ref.dat', 'rb')
+    #     # g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+    #     g = open(reference + '/model_ref.dat', 'rb')
+    #     self.assertEqual(str(pickle.load(f)), str(pickle.load(g)))
+    #     f.close()
+    #     g.close()

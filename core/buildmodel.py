@@ -475,7 +475,7 @@ def prune_topo_descs(mode, input_descs, acts_train, out_model_dir):
     return cleaned_descriptors, indices, local_dnames
 
 
-def calc_phore_descs(mols, significant_bits=None):
+def calc_phore_descs(mols, significant_bits=None, testing=False):
     fp_holding = []
     accumulated_bits_set = {}
 
@@ -497,7 +497,8 @@ def calc_phore_descs(mols, significant_bits=None):
             for bit_num in range(len(significant_bits)):
                 if significant_bits[bit_num] in fp_holding[mol_num].GetOnBits():
                     phore_descs[mol_num, bit_num] = 1
-
+        if testing:
+            return "significant_bits: %d" % len(significant_bits), "fp_descriptors: %s" % str(phore_descs.shape)
         print("significant_bits:", len(significant_bits))
         print("fp_descriptors:", phore_descs.shape)
         return phore_descs
