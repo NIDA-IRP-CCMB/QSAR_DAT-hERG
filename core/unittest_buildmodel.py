@@ -151,9 +151,11 @@ class TestBuildModel(unittest.TestCase):
         model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
                                                       train_descs, train_acts, self.output_dir)
 
-        f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-        g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
-        # g = open(reference + '/model_ref.dat', 'rb')
+        # f = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+        f = open(reference + '/model_ref.dat', 'rb')
+        print(pickle.load(f))
+        # g = open(self.output_dir + ('/model_%s.dat' % output_ext), 'rb')
+        g = open(reference + '/model_ref.dat', 'rb')
         self.assertEqual(pickle.load(f), pickle.load(g))
         f.close()
         g.close()
