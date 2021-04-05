@@ -58,7 +58,7 @@ class TestBuildModel(unittest.TestCase):
         train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
         train_descs = np.concatenate((train_topo_descs, train_phore_descs), axis=1)
 
-        return train_mols, train_acts, train_names, train_descs
+        return train_mols, train_acts, train_names, train_descs, output_ext, topo_index, phore_sigbits
 
     # setup helper function for predictions
     def startUp2(self):
@@ -195,7 +195,7 @@ class TestBuildModel(unittest.TestCase):
         g.close()
 
     def test_build_model(self):
-        train_mols, train_acts, train_names, train_descs = self.startUp1()
+        train_mols, train_acts, train_names, train_descs, output_ext, topo_index, phore_sigbits = self.startUp1()
         model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
                                                       train_descs, train_acts, self.output_dir)
 
@@ -244,7 +244,7 @@ class TestBuildModel(unittest.TestCase):
         a = np.load(reference + "/predictmodel.npy", allow_pickle=True)
         ref = dict(enumerate(a.flatten()))[0]
 
-        train_mols, train_acts, train_names, train_descs = self.startUp1()
+        train_mols, train_acts, train_names, train_descs, output_ext, topo_index, phore_sigbits = self.startUp1()
         model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
                                                       train_descs, train_acts, self.output_dir)
 
