@@ -5,6 +5,7 @@ import unittest
 import shutil
 import pickle
 import os
+import numpy as np
 home = str(Path.home())
 base_dir = home+'/repositories/herg/hERGvDAT/'
 core_dir = base_dir+'/core'
@@ -38,7 +39,7 @@ class TestBuildModel(unittest.TestCase):
         if os.path.isdir(self.output_dir):
             os.system("rm -rf %s" % self.output_dir)
 
-    # setup helper function
+    # setup helper function for buildmodel
     def startUp(self):
         mols, acts, deletes, changes = read_data4buildmodel(in_file, self.mode)
         mols, acts = curate_mols(mols, acts, deletes, changes)
@@ -46,6 +47,29 @@ class TestBuildModel(unittest.TestCase):
         output_ext = get_output_ext('a', 'b', 0, 1, 2)
 
         return train_mols, train_names, train_acts, output_ext
+
+    # setup helper function for predictions
+    def startUp2(self):
+        input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
+                               modeldir=reference)
+        molnames = input_data['molnames']
+        mols = input_data['molecules']
+        model = input_data['model']
+        inds = input_data['inds']
+        sigbits = input_data['sigbits']
+        ad_fps = input_data['ad_fps']
+        ad_radius = input_data['ad_radius']
+        appdom_results = check_appdom(ad_fps, ad_radius, mols, molnames, step="pred")
+        mols = appdom_results['test_mols']
+        molnames = appdom_results['test_names']
+        molecules_rej = appdom_results['rej_mols']
+        molnames_rej = appdom_results['rej_names']
+        descriptors = calc_topo_descs(mols, inds)
+        result_list = []
+        phore_descriptors = calc_phore_descs(mols, sigbits)
+        descriptors = np.concatenate((descriptors, phore_descriptors), axis=1)
+
+        return molnames, descriptors, model, result_list
 
     # Check using negative control
     def test_read_data(self):
@@ -191,24 +215,21 @@ class TestBuildModel(unittest.TestCase):
     def test_make_preds(self):
         a = np.load(reference+"/makepreds.npy", allow_pickle=True)
         ref = dict(enumerate(a.flatten()))[0]
-        input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
-                               modeldir=reference)
-        molnames = input_data['molnames']
-        mols = input_data['molecules']
-        model = input_data['model']
-        inds = input_data['inds']
-        sigbits = input_data['sigbits']
-        ad_fps = input_data['ad_fps']
-        ad_radius = input_data['ad_radius']
-        appdom_results = check_appdom(ad_fps, ad_radius, mols, molnames, step="pred")
-        mols = appdom_results['test_mols']
-        molnames = appdom_results['test_names']
-        molecules_rej = appdom_results['rej_mols']
-        molnames_rej = appdom_results['rej_names']
-        descriptors = calc_topo_descs(mols, inds)
-        result_list = []
-        phore_descriptors = calc_phore_descs(mols, sigbits)
-        descriptors = np.concatenate((descriptors, phore_descriptors), axis=1)
+        molnames, descriptors, model, result_list = self.startUp2()
         pred_results = make_preds(molnames, descriptors, model, self.rand_split[0], mode=self.mode)
 
         self.assertTrue((pred_results["predictions"] == ref["predictions"]).all())
+
+    def test_summarize_preds(self):
+        molnames, descriptors, model, result_list = self.startUp2()
+        pred_results = make_preds(molnames, descriptors, model, self.rand_split[0], mode=self.mode)
+        compound, pred_mean, pred_error = summarize_preds(molnames, result_list)
+        data = {"compound": compound, "mean": pred_mean, "stdev": pred_error}
+
+        a = np.load(reference+"/summarizepreds.npy", allow_pickle=True)
+        ref = dict(enumerate(a.flatten()))[0]
+
+        self.assertTrue((data["compound"] == ref["compound"]).all())
+        self.assertTrue((data["mean"] == ref["mean"]).all())
+        self.assertTrue((data["stdev"] == ref["stdev"]).all())
+
