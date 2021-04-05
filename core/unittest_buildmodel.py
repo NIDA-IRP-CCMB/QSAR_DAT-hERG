@@ -230,7 +230,7 @@ class TestBuildModel(unittest.TestCase):
         a = np.load(reference+"/summarizepreds.npy", allow_pickle=True)
         ref = dict(enumerate(a.flatten()))[0]
 
-        self.assertTrue((data["compound"] == ref["compound"]).all())
+        self.assertTrue(data["compound"] == ref["compound"])
         self.assertTrue((data["mean"] == ref["mean"]).all())
         self.assertTrue((data["stdev"] == ref["stdev"]).all())
 
