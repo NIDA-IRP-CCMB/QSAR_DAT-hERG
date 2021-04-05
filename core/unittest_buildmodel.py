@@ -28,9 +28,12 @@ class TestBuildModel(unittest.TestCase):
         self.output_dir = "test_output"
         self.rand_split = gen_random_splits(control_seed=2020, num_splits=1)
         self.rand_states = gen_random_splits(control_seed=501, num_splits=1)
+
+        # create a temporary output directory for testing
         if not os.path.exists(self.output_dir):
             Path(self.output_dir).mkdir(parents=True, exist_ok=True)
 
+    # remove all files and directories created during testing
     def tearDown(self):
         if os.path.isdir(self.output_dir):
             os.system("rm -rf %s" % self.output_dir)
@@ -184,3 +187,27 @@ class TestBuildModel(unittest.TestCase):
         self.assertEqual(ref["inds"], input_data["inds"])
         self.assertEqual(ref["sigbits"], input_data["sigbits"])
         self.assertEqual(str(ref["model"]), str(input_data["model"]))
+
+    def test_make_preds(self):
+        a = np.load(reference+"/makepreds.npy", allow_pickle=True)
+        ref = dict(enumerate(a.flatten()))[0]
+        input_data = read_mols(mode, method, "pred", datadir="unittest_data/data4buildmodels", modeldir=output_dir)
+        molnames = input_data['molnames']
+        mols = input_data['molecules']
+        model = input_data['model']
+        inds = input_data['inds']
+        sigbits = input_data['sigbits']
+        ad_fps = input_data['ad_fps']
+        ad_radius = input_data['ad_radius']
+        appdom_results = check_appdom(ad_fps, ad_radius, mols, molnames, step="pred")
+        mols = appdom_results['test_mols']
+        molnames = appdom_results['test_names']
+        molecules_rej = appdom_results['rej_mols']
+        molnames_rej = appdom_results['rej_names']
+        descriptors = calc_topo_descs(mols, inds)
+        result_list = []
+        phore_descriptors = calc_phore_descs(mols, sigbits)
+        descriptors = np.concatenate((descriptors, phore_descriptors), axis=1)
+        pred_results = make_preds(molnames, descriptors, self.model, self.random_split[0], mode=self.mode)
+
+        self.assertEqual(pred_results, ref)
