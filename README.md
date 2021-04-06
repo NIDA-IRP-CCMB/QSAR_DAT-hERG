@@ -18,7 +18,7 @@ descritors rather than fingerprint descriptors derived from the Morgan Topologic
 ***Workflow***
 
 Workflow of building the machine learning based QSAR models and using them to make predictions.
-![Workflow](core/doc/workflow_v3.png)
+![Workflow](core/doc/workflow_v3_ls-01.png)
 
 ## Runtime environment
 
