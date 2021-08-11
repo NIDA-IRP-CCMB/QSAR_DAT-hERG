@@ -1,0 +1,95 @@
+# raw data from chembl25
+
+- folders
+    data_sql_chembl25_DAT/
+    data_sql_chembl25_hERG/
+
+- under each folder
+    - chembl25_Classifier.sql was used to generate chembl25_Classifier_raw.tsv
+    - chembl25_Classifier.tsv is a cleanup version of chembl25_Classifier_raw.tsv
+    - for DAT, human dat and rat data were seperated in chembl25_Classifier_homo.tsv and chembl25_Classifier_rat.tsv
+
+
+
+# dataset used for modeling training
+
+- both IC50 and Ki were seperated for hERG/DAT
+    # hERG dataset
+    dataset_hERG_binding_IC50/
+    dataset_hERG_binding_Ki/
+    dataset_hERG_clamp_IC50/
+    dataset_hERG_clamp_Ki/
+
+    # All DAT dataset
+    dataset_all_DAT_binding_IC50/
+    dataset_all_DAT_binding_Ki/
+    dataset_all_DAT_uptake_IC50/
+    dataset_all_DAT_uptake_Ki/
+
+    # human DAT dataset
+    dataset_hDAT_binding_IC50/
+    dataset_hDAT_binding_Ki/
+    dataset_hDAT_uptake_IC50/
+    dataset_hDAT_uptake_Ki/
+
+    # rat DAT dataset
+    dataset_rDAT_binding_IC50/
+    dataset_rDAT_binding_Ki/
+    dataset_rDAT_uptake_IC50/
+    dataset_rDAT_uptake_Ki/
+
+- under each folder
+    - pubdata.act and pubdata.smi are the files used for regression model
+    - pubdata_class.act and pubdata_class.smi are the files used for classicialtion model
+
+- inhouse DAT dataset follows the same file structure 
+    # inhouse DAT dataset
+    dataset_inhouse_NewmanLab/
+
+
+
+# quick summary via linux wc
+
+- check dataset used for regression model, those number matches the "After deduplication pass" in Table S1
+
+    $ wc -l */pubdata.act
+       538 dataset_all_DAT_binding_IC50/pubdata.act
+      1189 dataset_all_DAT_binding_Ki/pubdata.act
+       554 dataset_all_DAT_uptake_IC50/pubdata.act
+       350 dataset_all_DAT_uptake_Ki/pubdata.act
+       279 dataset_hDAT_binding_IC50/pubdata.act
+       684 dataset_hDAT_binding_Ki/pubdata.act
+       414 dataset_hDAT_uptake_IC50/pubdata.act
+       126 dataset_hDAT_uptake_Ki/pubdata.act
+      2043 dataset_hERG_binding_IC50/pubdata.act
+       634 dataset_hERG_binding_Ki/pubdata.act
+      1405 dataset_hERG_clamp_IC50/pubdata.act
+        44 dataset_hERG_clamp_Ki/pubdata.act
+       277 dataset_inhouse_NewmanLab/pubdata.act
+       260 dataset_rDAT_binding_IC50/pubdata.act
+       541 dataset_rDAT_binding_Ki/pubdata.act
+       140 dataset_rDAT_uptake_IC50/pubdata.act
+       229 dataset_rDAT_uptake_Ki/pubdata.act
+      9707 total
+
+- check dataset used for classiciation model, those number matches the "Excluding 5-6 pKi/pIC50" row in Table S1
+
+    $ wc -l */pubdata_class.act
+      434 dataset_all_DAT_binding_IC50/pubdata_class.act
+      887 dataset_all_DAT_binding_Ki/pubdata_class.act
+      383 dataset_all_DAT_uptake_IC50/pubdata_class.act
+      219 dataset_all_DAT_uptake_Ki/pubdata_class.act
+      213 dataset_hDAT_binding_IC50/pubdata_class.act
+      503 dataset_hDAT_binding_Ki/pubdata_class.act
+      277 dataset_hDAT_uptake_IC50/pubdata_class.act
+       45 dataset_hDAT_uptake_Ki/pubdata_class.act
+     1137 dataset_hERG_binding_IC50/pubdata_class.act
+      334 dataset_hERG_binding_Ki/pubdata_class.act
+      783 dataset_hERG_clamp_IC50/pubdata_class.act
+       42 dataset_hERG_clamp_Ki/pubdata_class.act
+      252 dataset_inhouse_NewmanLab/pubdata_class.act
+      222 dataset_rDAT_binding_IC50/pubdata_class.act
+      424 dataset_rDAT_binding_Ki/pubdata_class.act
+      110 dataset_rDAT_uptake_IC50/pubdata_class.act
+      177 dataset_rDAT_uptake_Ki/pubdata_class.act
+     6442 total
