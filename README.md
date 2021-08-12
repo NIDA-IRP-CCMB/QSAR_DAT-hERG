@@ -64,6 +64,19 @@ be run in "example" (see README.md in example).
     ├── example         <-- example of running filters/buildmodels/prediction
     └── README.md
 
+### Changing path
+For each py file in core, you may need to change the path. The current path is set to be under /USERHOME/repositories/QSAR_DAT-hERG. 
+
+    import sys, os
+    from pathlib import Path
+    home = str(Path.home())
+    base_dir = home+'/repositories/QSAR_DAT-hERG'      # <--------------- You may need to change the path 
+    core_dir = base_dir+'/core'
+    conf_dir = core_dir+'/conf'
+    sys.path.insert(0, core_dir)
+    sys.path.insert(0, conf_dir)
+
+
 ### unittest
 To run the unittest, please do this in to the root diectory. There are 19 defined functions in filters.py. The 
 unittest_filters.py cover 15 functions, and some file output funcation (write_smi_act_reg 
@@ -129,10 +142,10 @@ There are four files are required in our code. AmyCompounds.act/AmyCompounds.smi
 That ensure the validation set is not used during the training.  "to_change.txt" is used for correcting the bio-activity data. "to_remove.txt" is used 
 to remove obvious problematic compounds from the training dataset. In this example, we simple touch those files without any modification. 
 
-    touch dataset_all_DAT_inhibitor/AmyCompounds.act
-    touch dataset_all_DAT_inhibitor/AmyCompounds.smi
-    touch dataset_all_DAT_inhibitor/to_change.txt
-    touch dataset_all_DAT_inhibitor/to_remove.txt
+    touch dataset_all_DAT_inhibitor_Ki/AmyCompounds.act
+    touch dataset_all_DAT_inhibitor_Ki/AmyCompounds.smi
+    touch dataset_all_DAT_inhibitor_Ki/to_change.txt
+    touch dataset_all_DAT_inhibitor_Ki/to_remove.txt
 
 An example of running buildmodels
 
