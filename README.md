@@ -65,7 +65,7 @@ be run in "example" (see README.md in example).
     └── README.md
 
 ### Changing path
-For each py file in core, you may need to change the path. The current path is set to be under /USERHOME/repositories/QSAR_DAT-hERG. 
+For each py file in core directory, you may need to change the path. The current path is set to be under /USERHOME/repositories/QSAR_DAT-hERG. 
 
     import sys, os
     from pathlib import Path
