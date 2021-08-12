@@ -1,11 +1,16 @@
+"""
+Written by Andy Guan
+This file contains functions to perform unit tests on our buildmodel module
+"""
 ## define enviroment
+
 import sys
 from pathlib import Path
 import unittest
-import shutil
 import pickle
 import os
 import numpy as np
+
 home = str(Path.home())
 base_dir = home+'/repositories/QSAR_DAT-hERG'
 core_dir = base_dir+'/core'
@@ -15,7 +20,12 @@ sys.path.insert(0, conf_dir)
 sys.path.insert(0, core_dir)
 
 from buildmodel import *
-from descriptor_setup import dnames, dlist
+
+""" Define core files used to run unittest
+1) in_file - contains the data used to build model during unit test
+2) reference - directory with reference output files to ensure fidelity between test run and previous runs
+3) negcon - shorter version of in_file, used as a negative condition for testing read_data function
+"""
 
 in_file = unittest_data_dir+"/data4buildmodels/pubdata_40"
 reference = unittest_data_dir+"/reference"
@@ -24,6 +34,7 @@ negcon = unittest_data_dir+"/data4buildmodels/pubdata_20_ctrl"
 
 class TestBuildModel(unittest.TestCase):
     def setUp(self):
+        """ Function used to setup for unit testing """
         self.mode = 'reg'
         self.method = 'xgb'
         self.output_dir = "test_output"
@@ -36,20 +47,28 @@ class TestBuildModel(unittest.TestCase):
 
     # remove all files and directories created during testing
     def tearDown(self):
+        """ Function used to remove intermediate elements created from unit testing """
         if os.path.isdir(self.output_dir):
             os.system("rm -rf %s" % self.output_dir)
 
     # setup helper function for buildmodel
     def startUp(self):
+        """ Setup helper function
+
+        Performs the early steps in buildmodel
+        Used to setup for testing of some functions
+        Prevents redundant code lines in testing functions
+        """
         mols, acts, deletes, changes = read_data4buildmodel(in_file, self.mode)
         mols, acts = curate_mols(mols, acts, deletes, changes)
         train_mols, train_names, train_acts = all_data(mols, acts)
+        # output_ext is required to be defined to be able to read back results during testing
         output_ext = get_output_ext('a', 'b', 0, 1, 2)
 
         return train_mols, train_names, train_acts, output_ext
 
-    # setup helper function for late-stage buildmodel functions
     def startUp1(self):
+        """ Setup helper function for late-stage buildmodel functions """
         train_mols, train_names, train_acts, output_ext = self.startUp()
         train_topo_descs = calc_topo_descs(train_mols)
         train_topo_descs, topo_index, topo_names = prune_topo_descs(self.mode, train_topo_descs,
@@ -60,8 +79,8 @@ class TestBuildModel(unittest.TestCase):
 
         return train_mols, train_acts, train_names, train_descs, output_ext, topo_index, phore_sigbits
 
-    # setup helper function for predictions
     def startUp2(self):
+        """ Setup helper function for prediction functions """
         input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
                                modeldir=reference)
         molnames = input_data['molnames']
@@ -85,6 +104,7 @@ class TestBuildModel(unittest.TestCase):
 
     # Check using negative control
     def test_read_data(self):
+        """ Test read_data function """
         mols1, acts1, deletes1, changes1 = read_data4buildmodel(in_file, self.mode)
         mols2, acts2, deletes2, changes2 = read_data4buildmodel(negcon, self.mode)
         mols3, acts3, deletes3, changes3 = read_data4buildmodel(in_file, self.mode)
@@ -97,20 +117,34 @@ class TestBuildModel(unittest.TestCase):
         self.assertEqual(acts1, acts3)
 
     def test_curate_mols(self):
+        """ Test curate_mols function
+
+        Input arrays must have same length (from smile and activity data)
+        """
+        # define test/dummy arrays to test functionality of curate_mols
         a = [(1, 2), (3, 4)]
         b = [(5, 6), (7, 8)]
         c = [(1, 2)]
+
         with self.assertRaises(SystemExit):
+            # test to make sure that function checks for equal length
             curate_mols(a, [], [], [])
             curate_mols(a, b, [], [])
 
+        # we remove nothing, so the resulting data should just be untouched
         self.assertEqual(curate_mols(a, a, {}, {}), (a, a))
+
+        # check that delete list works as intended
+        # we will delete 4, so there should only be (1,2) in the output
         self.assertEqual(curate_mols(a, a, {4}, {}), (c, c))
 
         mols, acts, deletes, changes = read_data4buildmodel(in_file, 'reg')
         mols, acts = curate_mols(mols, acts, deletes, changes)
 
+        # TO-DO: leave more notes
+
     def test_split_data(self):
+        """ Test split_data function """
         mols, acts, deletes, changes = read_data4buildmodel(in_file, self.mode)
         mols, acts = curate_mols(mols, acts, deletes, changes)
         train_mols, train_names, train_acts, test_mols, test_names, test_acts = split_data(mols, acts, 0.10, 0)
@@ -119,18 +153,25 @@ class TestBuildModel(unittest.TestCase):
         self.assertEqual(len(train_mols) + len(test_mols), len(mols))
 
     def test_all_data(self):
+        """ Test all_data function """
         a = [[1, 2], [3, 4]]
         b = [1, 3]
         c = [2, 4]
         self.assertEquals(all_data(a, a), (b, c, b))
 
     def test_get_output_ext(self):
+        """ Test get_output_ext function """
         self.assertEquals(get_output_ext('a', 'b', 0, 1, 2), "a_b_0.00_1_2")
 
     def test_get_output_dir(self):
+        """ Test get_output_dir function """
         self.assertEquals(get_output_dir('a', 'b', 0), "a_b_0.00")
 
     def test_calc_appdom(self):
+        """ Test calc_appdom function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         train_mols, train_names, train_acts, output_ext = self.startUp()
         self.assertEqual(len(calc_appdom(train_mols, self.output_dir)), 2)
 
@@ -153,14 +194,23 @@ class TestBuildModel(unittest.TestCase):
             check_appdom(1, 2, 3, 4, 5, 6, step='b')
 
     def test_calc_topo_descs(self):
+        """ Test calc_topo_descs function """
         train_mols, train_names, train_acts, output_ext = self.startUp()
         train_topo_descs = calc_topo_descs(train_mols)
         sel = [1, 2, 3]
+        # check that entries are properly removed when specified
+        # first entry should have higher count than second
         self.assertGreater(train_topo_descs.shape[1], calc_topo_descs(train_mols, sel).shape[1])
+        # check that the topo_descs have 200 entries (same as descriptor number)
         self.assertEqual(train_topo_descs.shape[1], 200)
+        # check that the right number of entries are maintained when remove is specified
         self.assertEquals(calc_topo_descs(train_mols, sel).shape[1], len(sel))
 
     def test_prune_topo_descs(self):
+        """ Test prune_topo_descs function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         train_mols, train_names, train_acts, output_ext = self.startUp()
         train_topo_descs = calc_topo_descs(train_mols)
         self.assertEqual(len(prune_topo_descs(self.mode, train_topo_descs, train_acts, self.output_dir)), 3)
@@ -172,6 +222,10 @@ class TestBuildModel(unittest.TestCase):
         g.close()
 
     def test_calc_phore_descs(self):
+        """ Test calc_phore_descs function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         train_mols, train_names, train_acts, output_ext = self.startUp()
         train_phore_descs = calc_phore_descs(train_mols)
         train_phore_descs, phore_sigbits, phore_names = prune_phore_descs(train_phore_descs, self.output_dir)
@@ -184,6 +238,10 @@ class TestBuildModel(unittest.TestCase):
         f.close()
 
     def test_prune_phore_descs(self):
+        """ Test prune_phore_descs function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         train_mols, train_names, train_acts, output_ext = self.startUp()
         train_phore_descs = calc_phore_descs(train_mols)
         self.assertEqual(len(prune_phore_descs(train_phore_descs, self.output_dir)), 3)
@@ -195,6 +253,10 @@ class TestBuildModel(unittest.TestCase):
         g.close()
 
     def test_build_model(self):
+        """ Test build_model function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         train_mols, train_acts, train_names, train_descs, output_ext, topo_index, phore_sigbits = self.startUp1()
         model, model_score, best_params = build_model(self.mode, self.method, self.rand_states[0],
                                                       train_descs, train_acts, self.output_dir)
@@ -209,6 +271,10 @@ class TestBuildModel(unittest.TestCase):
         g.close()
 
     def test_read_mols(self):
+        """ Test read_mols function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         a = np.load(reference+"/readmols4pred.npy", allow_pickle=True)
         input_data = read_mols(self.mode, self.method, "pred", datadir="core/unittest_data/data4buildmodels",
                                modeldir=reference)
@@ -219,6 +285,10 @@ class TestBuildModel(unittest.TestCase):
         self.assertEqual(str(ref["model"]), str(input_data["model"]))
 
     def test_make_preds(self):
+        """ Test make_preds function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         a = np.load(reference+"/makepreds.npy", allow_pickle=True)
         ref = dict(enumerate(a.flatten()))[0]
         molnames, descriptors, model, result_list = self.startUp2()
@@ -227,6 +297,10 @@ class TestBuildModel(unittest.TestCase):
         self.assertTrue((pred_results["predictions"] == ref["predictions"]).all())
 
     def test_summarize_preds(self):
+        """ Test summarize_preds function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         molnames, descriptors, model, result_list = self.startUp2()
         pred_results = make_preds(molnames, descriptors, model, self.rand_split[0], mode=self.mode)
         result_list.append(pred_results['predictions'])
@@ -241,6 +315,10 @@ class TestBuildModel(unittest.TestCase):
         self.assertTrue(data["stdev"] == ref["stdev"])
 
     def test_predict_model(self):
+        """ Test predict_model function
+
+        Uses a reference results file to ensure fidelity of results
+        """
         a = np.load(reference + "/predictmodel.npy", allow_pickle=True)
         ref = dict(enumerate(a.flatten()))[0]
 
