@@ -58,8 +58,9 @@ for foo in Descriptors.descList:
 The major scripts are in core directory. The unittest is included in core. An example of running the production run can 
 be run in "example" (see README.md in example). 
 
-    hERGvDAT
+    QSAR_DAT-hERG
     ├── core            <-- major scripts (& unittest included)
+    ├── dataset         <-- dataset used for model building
     ├── example         <-- example of running filters/buildmodels/prediction
     └── README.md
 

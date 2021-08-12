@@ -4,7 +4,7 @@
 import sys, os
 from pathlib import Path
 home = str(Path.home())
-core_dir = home+'/repositories/herg/core'
+core_dir = home+'/repositories/QSAR_DAT-hERG'
 conf_dir = core_dir+"/conf"
 sys.path.insert(0, core_dir)
 sys.path.insert(0, conf_dir)

@@ -2,7 +2,7 @@
 import sys, os
 from pathlib import Path
 home = str(Path.home())
-base_dir = home+'/repositories/herg/hERGvDAT/'
+base_dir = home+'/repositories/QSAR_DAT-hERG'
 core_dir = base_dir+'/core'
 conf_dir = core_dir+'/conf'
 sys.path.insert(0, conf_dir)
