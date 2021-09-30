@@ -1,13 +1,14 @@
 ## Introduction
-The code in this repository is the chemoinformatics part of our project in developing an infrastrature for counter screening small-molecule ligands for a selected target and against hERG. 
-For the moment, we focus on the ligands for the dopamine transporter (DAT).  
+The code in this repository is the chemoinformatics part of our project in developing an infrastrature for counter screening small-molecule ligands for a selected target and against hERG. The repository is associated with [Toward Reducing hERG Affinities for DAT Inhibitors with a Combined Machine Learning and Molecular Modeling Approach](https://pubs.acs.org/doi/abs/10.1021/acs.jcim.1c00856).
+
+For the moment, we focus on the ligands for the dopamine transporter (DAT). 
+
 
 The regression models are based on the methods found in Wacker and Noskov
 [Performance of machine learning algorithms for qualitative and quantitative
 prediction drug blockade of hERG1 channel](https://doi.org/10.1016/j.comtox.2017.05.001).
 The classifier models were initially derived from the methods of
-Siramshetty, et al [The Catch-22 of Predicting hERG Blockade Using Publicly Accessible Bioactivity Data](https://pubs.acs.org/doi/10.1021/acs.jcim.8b00150). This repository is asscoated with Lee, et al [Toward Reducing hERG Affinities for DAT Inhibitors with a Combined Machine Learning and Molecular Modeling Approach](https://pubs.acs.org/doi/abs/10.1021/acs.jcim.1c00856).
-
+Siramshetty, et al [The Catch-22 of Predicting hERG Blockade Using Publicly Accessible Bioactivity Data](https://pubs.acs.org/doi/10.1021/acs.jcim.8b00150). 
 The counter or synergistic screening platform can be easily adapted to identify novel compounds with desired selectivity for other targets, such as the ligands antagonizing both DAT and sigma1 receptor. 
 
 ***Our improvements***
