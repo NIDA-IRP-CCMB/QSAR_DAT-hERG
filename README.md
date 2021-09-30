@@ -6,7 +6,7 @@ The regression models are based on the methods found in Wacker and Noskov
 [Performance of machine learning algorithms for qualitative and quantitative
 prediction drug blockade of hERG1 channel](https://doi.org/10.1016/j.comtox.2017.05.001).
 The classifier models were initially derived from the methods of
-Siramshetty, et al [The Catch-22 of Predicting hERG Blockade Using Publicly Accessible Bioactivity Data](https://pubs.acs.org/doi/10.1021/acs.jcim.8b00150). 
+Siramshetty, et al [The Catch-22 of Predicting hERG Blockade Using Publicly Accessible Bioactivity Data](https://pubs.acs.org/doi/10.1021/acs.jcim.8b00150). This repository is asscoated with Lee, et al [Toward Reducing hERG Affinities for DAT Inhibitors with a Combined Machine Learning and Molecular Modeling Approach](https://pubs.acs.org/doi/abs/10.1021/acs.jcim.1c00856).
 
 The counter or synergistic screening platform can be easily adapted to identify novel compounds with desired selectivity for other targets, such as the ligands antagonizing both DAT and sigma1 receptor. 
 
@@ -22,17 +22,13 @@ Workflow of building the machine learning based QSAR models and using them to ma
 
 ## Runtime environment
 
-These models are coded in python 3.6.4.  They were developed using RDKit version
-2018.3.1, scikit-learn 0.21.1, MolVS 0.1.1, and xgboost .  Xgboost,
+These models are coded in python 3.7.6 ( intallor from Anaconda python [Anaconda3-2020.02-*.sh](https://repo.anaconda.com/archive/)). 
+They were developed using RDKit version 2020.03.3, scikit-learn 0.23.2, MolVS 0.1.1, and xgboost 1.0.2.  Xgboost,
 Scikit-learn, RDKit and prerequisites were installed from the anaconda
 repository (using the channel rdkit for rdkit and its prerequisites).  MolVS
-was installed under anaconda using pip.  If using a recent version of anaconda
-python to build and run the models, it is probably necessary to create a virtual
-environment based on python 3.6.  At present, trying to install RDKit into a
-python 3.7 environment does not appear to be supported and causes anaconda to
-regress the entire installation to python 2.7.  Scikit-learn is installed by
+was installed under anaconda using pip. Scikit-learn is installed by
 default with the full anaconda distribution (not miniconda). The commands to
-install xgboost, RDKit and MolVS into an active python 3.6 virtual environment
+install xgboost, RDKit and MolVS into an active python virtual environment
 are:
 ```
 conda install py-xgboost
