@@ -41,6 +41,17 @@ pip install MolVS
 pip install -U scikit-learn
 ```
 
+Version for major moduels used in this repository:
+```
+MolVS==0.1.1
+scikit-image==0.16.2
+scikit-learn==0.23.2
+rdkit version:  2020.03.3
+rdBase.rdkitVersion :  2020.03.3
+rdBase.boostVersion :  1_67
+xgboost version:  1.0.2
+```
+
 ### About Descriptor Generation
 
 The 2D descriptors that are available in rdkit are referenced in Descriptors.descList.  A code snippet that will list
