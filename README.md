@@ -23,7 +23,7 @@ Workflow of building the machine learning based QSAR models and using them to ma
 
 ## Runtime environment
 
-These models are coded in python 3.7.6 ( intallor from Anaconda python [Anaconda3-2020.02-*.sh](https://repo.anaconda.com/archive/)). 
+These models are coded in python 3.7.6 (installer from Anaconda python [Anaconda3-2020.02-*.sh](https://repo.anaconda.com/archive/)). 
 They were developed using RDKit version 2020.03.3, scikit-learn 0.23.2, MolVS 0.1.1, and xgboost 1.0.2.  Xgboost,
 Scikit-learn, RDKit and prerequisites were installed from the anaconda
 repository (using the channel rdkit for rdkit and its prerequisites).  MolVS
