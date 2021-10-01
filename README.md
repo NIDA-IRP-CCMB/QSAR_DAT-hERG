@@ -34,9 +34,6 @@ are:
 ```
 conda install py-xgboost
 conda install -c rdkit rdkit 
-#http://rdkit.org/docs/Install.html#cross-platform-under-anaconda-python-fastest-install
-#just tried using conda-forge
-#conda install -c conda-forge rdkit
 pip install MolVS
 pip install -U scikit-learn
 ```
