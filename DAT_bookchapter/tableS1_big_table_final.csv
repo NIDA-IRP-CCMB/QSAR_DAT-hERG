@@ -1,0 +1,62 @@
+﻿Name,DrugBank ID,DAT,SERT,NET,DAT-SERT,DAT-NET,selective,cluster id,source,source before replacement,doi (DAT),doi (SERT),doi (NET)
+vanoxerine#,DB03701,10.22,7.62,7.10,2.60,3.12,DAT selective,D,ChEMBL,ChEMBL,10.1021/jm9505324,10.1016/j.bmc.2014.11.007,10.1021/jm020419v
+RTI-55#,,9.32,9.42,8.85,-0.10,0.47,,A,ChEMBL,ChEMBL,10.1016/j.bmcl.2004.02.043,10.1021/jm0401311,10.1021/jm0100180
+SRI-31142#,,8.72,,,,,DAT only,E,literature search,literature search,10.1124/jpet.114.222299,,
+dasotraline,DB12305,8.70,7.85,8.40,0.85,0.30,,G,ChEMBL,ChEMBL,10.1021/acs.jmedchem.6b01827,10.1021/acs.jmedchem.6b01827,10.1021/acs.jmedchem.6b01827
+MDPV#,,8.68,,,,,DAT only,C,ChEMBL,ChEMBL,10.1021/acs.jmedchem.7b00085,,
+GBR-12935#,,8.43,6.21,6.20,2.22,2.23,DAT selective,D,ChEMBL,ChEMBL,10.1021/jm701270n,10.1021/jm701270n,10.1021/jm9902178
+altropane,DB04947,8.18,6.74,,1.44,,,A,replacement list,literature search,10.1002/(SICI)1098-2396(199806)29:2<93::AID-SYN1>3.0.CO;2-5,10.1002/(SICI)1098-2396(199806)29:2<93::AID-SYN1>3.0.CO;2-5,10.1002/(SICI)1098-2396(199806)29:2<93::AID-SYN1>3.0.CO;2-5
+dextroamphetamine,DB01576,8.18,8.32,8.21,-0.14,-0.03,,B,replacement list,,10.1016/j.bmcl.2013.03.066,10.1016/j.bmcl.2013.03.066,10.1016/j.bmcl.2013.03.066
+nomifensine#,DB04821,8.15,6.10,8.42,2.05,-0.27,,G,ChEMBL,ChEMBL,10.1021/ml300262e,10.1021/ml300262e,10.1021/acs.jmedchem.6b01827
+benztropine#,DB00245,8.10,5.29,5.86,2.81,2.24,DAT selective,D,ChEMBL,ChEMBL,10.1021/jm990472s,10.1021/jm0101592,
+tesofensine,DB06156,8.10,7.96,8.49,0.14,-0.39,,A,ChEMBL,ChEMBL,10.1021/acs.jmedchem.6b01827,10.1021/acs.jmedchem.6b01827,10.1021/acs.jmedchem.6b01827
+sydnocarb#,,8.08,5.00,5.82,3.08,2.26,DAT selective,B,replacement list,literature search,10.1124/jpet.111.178947,10.1124/jpet.111.178947,10.1124/jpet.111.178947
+PAL-1046#,,8.00,,,,,DAT only,I,literature search,literature search,10.1124/jpet.111.188946,,
+JHW-007#,,7.98,5.76,5.88,2.22,2.10,DAT selective,D,ChEMBL,ChEMBL,10.1021/acs.jmedchem.6b01373,10.1021/jm970525a,10.1021/jm970525a
+PAL-287#,,7.90,8.47,7.96,-0.57,-0.06,,I,ChEMBL,ChEMBL,10.1039/C6MD00245E,10.1039/C6MD00245E,10.1016/j.bmcl.2014.07.062
+RTI-82#,,7.85,,,,,DAT only,A,ChEMBL,ChEMBL,10.1016/j.bmc.2012.01.014,,
+sertraline,DB01104,7.60,10.12,6.80,-2.52,0.80,SERT selective,G,ChEMBL,ChEMBL,10.1016/s0960-894x(98)00062-6,,10.1021/jm00391a028
+ioflupane I-123,DB08824,7.54,,,,,DAT only,A,literature search,literature search,,,
+MFZ 2-24#,,7.48,,,,,DAT only,A,ChEMBL,ChEMBL,10.1021/jm0101904,,
+mazindol#,DB00579,7.35,6.61,9.10,0.74,-1.75,NET selective,J,replacement list,ChEMBL,10.1021/jm0309349 ,10.1021/jm0309349 ,10.1021/jm0309349 
+PAL-1045#,,7.34,,,,,DAT only,I,literature search,literature search,10.1124/jpet.111.188946,,
+PAL-738#,,7.24,,,,,DAT only,K,literature search,literature search,10.1124/jpet.111.188946,,
+MRS7292#,,6.90,,,,,DAT only,L,literature search,literature search,10.1021/acs.jmedchem.7b00141,,
+dexmethylphenidate,DB06701,6.79,8.00,6.69,-1.21,0.10,SERT selective,K,replacement list,,10.1097/FBP.0b013e3280143226,10.1097/FBP.0b013e3280143226,10.1097/FBP.0b013e3280143226
+WIN 35428#,,6.77,7.52,5.96,-0.75,0.81,,A,replacement list,ChEMBL,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B
+methylphenidate#,DB00422,6.72,5.01,6.66,1.71,0.06,,K,replacement list,ChEMBL,10.1021/jm0608614,10.1021/jm0608614,10.1021/jm0608614
+rimcazole#,,6.65,6.08,5.67,0.57,0.98,,J,replacement list,ChEMBL,10.1021/jm9902943,10.1021/jm9902943,10.1021/jm9902943
+duloxetine,DB00476,6.62,9.10,8.13,-2.48,-1.51,,I,replacement list,ChEMBL,10.1016/j.bmcl.2004.04.066,10.1016/j.bmcl.2004.04.066,10.1016/j.bmcl.2004.04.066
+troparil#,,6.59,6.64,6.59,-0.05,0.00,,A,replacement list,ChEMBL,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B
+nefazodone,DB01149,6.44,6.86,6.44,-0.42,0.00,,H,ChEMBL,ChEMBL,10.1016/s0960-894x(98)00062-6,10.1016/s0960-894x(98)00062-6,10.1016/s0960-894x(98)00062-6
+venlafaxine,DB00285,6.44,8.42,6.86,-1.98,-0.42,SERT selective,L,ChEMBL,ChEMBL,10.1016/s0960-894x(98)00062-6,,10.1016/s0960-894x(98)00062-6
+bupropion#,DB01156,6.43,4.33,5.16,2.10,1.27,DAT selective,L,ChEMBL,ChEMBL,10.1021/jm990472s,10.1021/jm030092d,10.1021/jm901189z
+trodusquemine,DB06333,6.40,,,,,DAT only,L,literature search,literature search,10.1038/oby.2009.444,,
+diphenylpyraline,DB01146,6.38,,,,,DAT only,D,ChEMBL,ChEMBL,10.1016/j.bmcl.2005.08.028,,
+methamphetamine#,DB01577,6.34,4.50,6.96,1.84,-0.62,,B,replacement list,BindingDB,10.1186/1471-2210-6-6,10.1186/1471-2210-6-6,10.1186/1471-2210-6-6
+sibutramine,DB01105,6.30,5.96,5.25,0.34,1.05,,L,ChEMBL,ChEMBL,,,
+SoRI-9804#,,6.28,,,,,DAT only,E,ChEMBL,ChEMBL,10.1016/s0960-894x(02)00348-7,,
+MDEA#,DB01566*,6.21,,,,,DAT only,C,literature search,literature search,10.1016/j.drugalcdep.2014.12.005,,
+amphetamine#,DB00182,6.19,4.41,7.15,1.78,-0.96,,B,replacement list,ChEMBL,10.1186/1471-2210-6-6,10.1186/1471-2210-6-6,10.1186/1471-2210-6-6
+cocaine#,DB00907,6.19,6.85,5.80,-0.66,0.39,,A,replacement list,ChEMBL,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B
+chlorpheniramine,DB01114,6.13,7.89,5.31,-1.76,0.82,SERT selective,D,ChEMBL,ChEMBL,,,
+phenmetrazine#,DB00830,6.12,,,,,DAT only,K,literature search,literature search,10.1038/srep31385,,
+MDMA#,DB01454,6.05,6.02,6.46,0.03,-0.41,,C,replacement list,ChEMBL,10.1016/j.bmcl.2013.03.066,10.1016/j.bmcl.2013.03.066,10.1016/j.bmcl.2013.03.066
+nisoxetine#,DB09186*,5.94,8.85,8.82,-2.91,-2.88,,L,ChEMBL,ChEMBL,10.1021/ml500187a,10.1021/jm0100180,10.1039/D1MD00072A
+nortriptyline#,DB00540*,5.88,8.16,8.50,-2.28,-2.62,,F,ChEMBL,ChEMBL,,,
+tamoxifen#,DB00675*,5.83,5.91,5.84,-0.08,-0.01,,L,ChEMBL,ChEMBL,,,
+phentermine,DB00191,5.80,4.86,6.61,0.94,-0.81,,B,replacement list,BindingDB,10.1002/1098-2396(20010101)39:1,10.1002/1098-2396(20010101)39:1,10.1002/1098-2396(20010101)39:1
+SoRI-20041#,,5.75,,,,,DAT only,E,literature search,literature search,10.1124/jpet.108.139675,,
+pseudoephedrine,DB00852,5.68,,,,,DAT only,B,BindingDB,BindingDB,10.1124/jpet.103.053975,,
+MDA#,DB01509*,5.62,5.64,6.15,-0.02,-0.53,,C,ChEMBL,ChEMBL,10.1016/j.bmcl.2013.03.066,10.1016/j.bmcl.2013.03.066,10.1016/j.bmcl.2013.03.066
+desipramine#,DB01151*,5.52,7.70,9.22,-2.18,-3.70,NET selective,F,ChEMBL,ChEMBL,10.1021/jm9706729,10.1021/jm100666w,10.1016/j.bmc.2009.09.023
+aripiprazole,DB01238,5.49,7.50,,-2.01,,,H,BindingDB,BindingDB,10.1038/sj.npp.1300203,10.1021/jm070516u,
+KM822#,,5.44,,,,,DAT only,J,literature search,literature search,10.1021/acschemneuro.9b00262,,
+trimipramine,DB00726,5.42,6.83,5.61,-1.41,-0.19,SERT selective,F,replacement list,BindingDB,10.1016/s0014-2999(97)01393-9,10.1016/s0014-2999(97)01393-9,10.1016/s0014-2999(97)01393-9
+ibogaine#,,5.39,6.23,,-0.84,,,L,ChEMBL,ChEMBL,10.1021/jm980156y,10.1074/jbc.m704456200,
+amoxapine,DB00543,5.37,7.24,7.80,-1.87,-2.43,,L,replacement list,BindingDB,10.1016/s0014-2999(97)01393-9,10.1016/s0014-2999(97)01393-9,10.1016/s0014-2999(97)01393-9
+SoRI-20040#,,5.27,,,,,DAT only,E,ChEMBL,ChEMBL,10.1016/s0960-894x(02)00348-7,,
+modafinil#,DB00745,5.19,<3.3(N.D.),4.45,,0.74,,D,replacement list,ChEMBL,10.1124/jpet.106.106583,10.1124/jpet.106.106583,10.1124/jpet.106.106583
+armodafinil,DB06413,5.18,3.63,3.77,1.55,1.41,DAT selective,D,replacement list,,10.1371/journal.pone.0179675,10.1371/journal.pone.0179675,10.1371/journal.pone.0179675
+escitalopram,DB01175,5.09,9.05,4.98,-3.96,0.11,SERT selective,L,replacement list,ChEMBL,10.1021/jm1005034,10.1021/jm1005034,10.1021/jm1005034
+dopamine#,DB00988,5.06,3.00,5.28,2.06,-0.22,,C,replacement list,ChEMBL,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B,10.1016/0024-3205(90)90132-B

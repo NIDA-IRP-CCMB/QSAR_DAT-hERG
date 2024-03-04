@@ -1,3 +1,9 @@
+[Return to home](../README.md)
+
+## Citation
+[Toward Reducing hERG Affinities for DAT Inhibitors with a Combined Machine Learning and Molecular Modeling Approach](https://pubs.acs.org/doi/abs/10.1021/acs.jcim.1c00856)
+
+
 ## Introduction
 The code in this repository is the chemoinformatics part of our project in developing an infrastrature for counter screening small-molecule ligands for a selected target and against hERG. The repository is associated with [Toward Reducing hERG Affinities for DAT Inhibitors with a Combined Machine Learning and Molecular Modeling Approach](https://pubs.acs.org/doi/abs/10.1021/acs.jcim.1c00856).
 
